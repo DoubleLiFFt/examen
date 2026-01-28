@@ -1,5 +1,6 @@
 import Button from "../example/Button.tsx";
 import { Link, useNavigate } from 'react-router-dom';
+import NotificationBell from './NotificationBell';
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -33,6 +34,7 @@ export default function Navbar() {
                     </>
                 ) : (
                     <div className="flex flex-row items-center gap-8">
+                        <NotificationBell />
                         <div className="flex items-center gap-3 px-4 py-2 bg-[#2a2a2a] rounded-full border border-[#3a3a3a]">
                             <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                             <span className="text-sm font-medium text-gray-300">
