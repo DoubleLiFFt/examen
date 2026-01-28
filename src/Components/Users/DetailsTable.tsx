@@ -36,7 +36,6 @@ export default function DetailsTable() {
                             </td>
                             <td className="px-4 py-4">
                                 <div className="flex justify-center items-center gap-3">
-                                    {/* Check Icon */}
                                     <button className="text-emerald-500 hover:text-emerald-400 transition-all hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
