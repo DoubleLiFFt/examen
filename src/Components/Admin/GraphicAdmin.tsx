@@ -71,7 +71,7 @@ export default function GraphicAdmin() {
         <div className="p-6 bg-[#1e1e1e] rounded-3xl border border-[#2a2a2a] shadow-xl">
             <div className="mb-6">
                 <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider">Total Usuarios</h3>
-                <p className="text-4xl font-black text-white">{totalUsuarios}</p>
+                <p className="text-4xl font-bold text-white">{totalUsuarios}</p>
             </div>
             <div className="h-64 w-full">
                 {users.length > 0 ? (

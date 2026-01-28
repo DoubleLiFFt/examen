@@ -14,7 +14,10 @@ export default function Login() {
             email: "prueba@gmail.com",
             password: "prueba"
         };
-        const Admin = { email: "admin@gmail.com", password: "admin" };
+        const Admin = {
+            email: "admin@gmail.com",
+            password: "admin"
+        };
         if (emailIngresado === User.email && passwordIngresado === User.password) {
             sessionStorage.setItem("userRole", "user");
             navigate("/UserView");
