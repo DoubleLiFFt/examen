@@ -31,12 +31,16 @@ export default function GraphicAdmin() {
     };
     const optionsBar = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: { display: false },
             title: {
                 display: true,
                 text: "Usuarios registrados",
-                color: '#f3f4f6'
+                color: '#f3f4f6',
+                font: {
+                    size: window.innerWidth < 768 ? 14 : 16
+                }
             },
             tooltip: {
                 backgroundColor: '#1e1e1e',
@@ -51,7 +55,10 @@ export default function GraphicAdmin() {
                 beginAtZero: true,
                 ticks: {
                     stepSize: 1,
-                    color: '#9ca3af'
+                    color: '#9ca3af',
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    }
                 },
                 grid: {
                     color: '#2a2a2a'
@@ -59,7 +66,10 @@ export default function GraphicAdmin() {
             },
             x: {
                 ticks: {
-                    color: '#9ca3af'
+                    color: '#9ca3af',
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    }
                 },
                 grid: {
                     display: false
@@ -68,16 +78,16 @@ export default function GraphicAdmin() {
         }
     };
     return (
-        <div className="p-6 bg-[#1e1e1e] rounded-3xl border border-[#2a2a2a] shadow-xl">
-            <div className="mb-6">
-                <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider">Total Usuarios</h3>
-                <p className="text-4xl font-bold text-white">{totalUsuarios}</p>
+        <div className="p-4 md:p-6 bg-[#1e1e1e] rounded-2xl md:rounded-3xl border border-[#2a2a2a] shadow-xl w-full">
+            <div className="mb-4 md:mb-6">
+                <h3 className="text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-wider">Total Usuarios</h3>
+                <p className="text-2xl md:text-4xl font-bold text-white">{totalUsuarios}</p>
             </div>
-            <div className="h-64 w-full">
+            <div className="h-48 md:h-64 w-full">
                 {users.length > 0 ? (
                     <Bar data={chartBar} options={optionsBar} />
                 ) : (
-                    <p className="text-center text-gray-500 py-10 italic">No hay registros para mostrar</p>
+                    <p className="text-center text-gray-500 py-10 italic text-sm">No hay registros para mostrar</p>
                 )}
             </div>
         </div>

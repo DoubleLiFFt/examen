@@ -16,7 +16,6 @@ export default function HistorialAccesos() {
             resultado = resultado.filter((h) => h.accion === accion);
         }
 
-
         if (inicio && fin) {
             resultado = resultado.filter((h) => h.createdTime >= inicio && h.createdTime <= fin);
         } else if (inicio) {
@@ -29,10 +28,11 @@ export default function HistorialAccesos() {
     };
 
     return (
-
-        <div className="border border-gray-800 bg-[#1e1e1e] p-8 rounded-3xl mb-12 mx-22 mt-12">
+        <div className="max-w-7xl mx-auto border border-gray-800 bg-[#1e1e1e] p-4 md:p-8 rounded-2xl md:rounded-3xl mb-12 mx-4 md:mx-auto mt-8 md:mt-12 shadow-xl">
             <FiltroHistorial onFiltrar={ejecutarFiltro} />
-            <TablaHistorial lista={datosFiltrados} />
+            <div className="mt-4 overflow-hidden">
+                <TablaHistorial lista={datosFiltrados} />
+            </div>
         </div>
     );
 }

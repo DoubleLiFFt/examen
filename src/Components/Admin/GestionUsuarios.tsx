@@ -16,9 +16,11 @@ export default function GestionUsuarios() {
     };
 
     return (
-        <div className="border border-gray-800 bg-[#1e1e1e] p-8 rounded-3xl mb-12 mx-22 mt-12">
+        <div className="max-w-7xl mx-auto border border-gray-800 bg-[#1e1e1e] p-4 md:p-8 rounded-2xl md:rounded-3xl mb-12 mx-4 md:mx-auto mt-8 md:mt-12 shadow-xl">
             <FiltroUsuarios alFiltrar={ejecutarFiltro} />
-            <TablaUsuarios lista={usuariosFiltrados} />
+            <div className="mt-4 overflow-hidden">
+                <TablaUsuarios lista={usuariosFiltrados} />
+            </div>
         </div>
     );
 }

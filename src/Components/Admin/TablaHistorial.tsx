@@ -1,39 +1,52 @@
 import { usersAccounts } from "../types/HistoUsers";
 import type { HistoUsers } from "../types/HistoUsers";
+
 interface TablaHistorialProps {
-  lista?: HistoUsers[]; // 
+    lista?: HistoUsers[];
 }
 
 export default function TablaHistorial({ lista }: TablaHistorialProps) {
-  const datosAMostrar = lista || usersAccounts;
+    const datosAMostrar = lista || usersAccounts;
 
-  return (
-    <table className="w-full border-collapse text-center">
-      <thead>
-        <tr className="text-gray-400 text-center font-extralight border-b">
-          <th className="p-2">FECHA</th>
-          <th className="p-2">USUARIO</th>
-          <th className="p-2">DIRECCION IP</th>
-          <th className="p-2">ACCION</th>
-        </tr>
-      </thead>
-      <tbody>
-        {datosAMostrar.map((historial, index) => (
-          <tr key={index} className="border-t hover:bg-gray-800">
-            <td className="p-2">{historial.createdTime}</td>
-            <td className="p-2">{historial.username}</td>
-            <td className="p-2">{historial.ip}</td>
-            <td className="p-2 text-sm">
-              <span className={`text-center font-semibold ${historial.accion === 'Login'
-                ? ' text-green-400  '
-                : ' text-red-400 '
+    return (
+        <div className="w-full overflow-x-auto rounded-xl">
+            <table className="w-full border-collapse text-center bg-[#1e1e1e] text-white">
+                <thead>
+                <tr className="text-gray-400 text-xs md:text-sm uppercase tracking-wider border-b border-[#2a2a2a]">
+                    <th className="p-4 font-semibold">FECHA</th>
+                    <th className="p-4 font-semibold">USUARIO</th>
+                    <th className="p-4 font-semibold hidden sm:table-cell">DIRECCION IP</th>
+                    <th className="p-4 font-semibold">ACCION</th>
+                </tr>
+                </thead>
+                <tbody className="divide-y divide-[#2a2a2a]">
+                {datosAMostrar.map((historial, index) => (
+                    <tr key={index} className="hover:bg-[#252525] transition-colors">
+                        <td className="p-4 text-xs md:text-sm text-gray-400 whitespace-nowrap">
+                            {historial.createdTime}
+                        </td>
+                        <td className="p-4 text-sm font-medium">
+                            {historial.username}
+                            <span className="block text-[10px] text-gray-600 sm:hidden mt-1">
+                  {historial.ip}
+                </span>
+                        </td>
+                        <td className="p-4 text-sm text-gray-500 hidden sm:table-cell">
+                            {historial.ip}
+                        </td>
+                        <td className="p-4 text-sm">
+                <span className={`font-bold px-2 py-1 rounded-md text-[10px] md:text-xs uppercase border ${
+                    historial.accion === 'Login'
+                        ? 'text-green-400 bg-green-400/10 border-green-400/20'
+                        : 'text-red-400 bg-red-400/10 border-red-400/20'
                 }`}>
-                {historial.accion}
-              </span>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+                  {historial.accion}
+                </span>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
