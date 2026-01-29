@@ -3,7 +3,7 @@ export default function ExportReports() {
         <section className="bg-[#1e1e1e] border border-[#2a2a2a] p-6 rounded-2xl shadow-lg">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="text-center md:text-left">
-                    <h3 className="text-lg font-bold text-white tracking-tight">Reportes y Exportación</h3>
+                    <h3 className="text-lg font-bold text-white tracking-tight">Exportar</h3>
                     <p className="text-xs text-gray-500 mt-1">Descarga aquí.</p>
                 </div>
                 <div className="flex flex-wrap justify-center gap-3">
