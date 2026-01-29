@@ -2,6 +2,7 @@ import TableUsersAdmin from "../../Components/Admin/TableUserAdmin";
 import CreateUserAdmin from "../../Components/Admin/CreateUserAdmin";
 import GraphicAdmin from "../../Components/Admin/GraphicAdmin.tsx";
 import HistorialAccesos from "../../Components/Admin/HistorialAccesos.tsx";
+import GestionUsuarios from "../../Components/Admin/GestionUsuarios.tsx";
 
 function AdminView() {
     return (
@@ -37,6 +38,9 @@ function AdminView() {
                         </div>
                     </section>
                 </div>
+            </div>
+            <div>
+                <GestionUsuarios/>
             </div>
             <div>
                 <HistorialAccesos/>
