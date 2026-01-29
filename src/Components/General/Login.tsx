@@ -67,7 +67,7 @@ export default function Login() {
                     <div className="text-center mt-6">
                         <p className="text-sm text-gray-500">
                             ¿Olvidaste tu contraseña?{" "}
-                            <Link to="/Login"
+                            <Link to="/CodConfirm"
                                   className="text-emerald-400 font-bold hover:text-emerald-300 transition-colors hover:underline"
                             >
                                 Recupérala aquí

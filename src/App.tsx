@@ -7,6 +7,8 @@ import GeneralView from "./pages/General/GeneralView.tsx";
 import Login from "./Components/General/Login.tsx";
 import Register from "./Components/General/Register.tsx";
 import ConfirCorreo from "./Components/General/confirCorreo.tsx";
+import CamContra from "./Components/Users/CamContra.tsx"
+import CodConfirm from "./Components/General/CodConfirm.tsx";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/confirCorreo" element={<ConfirCorreo />} />
+            <Route path="/CamContra" element={<CamContra />} />
+            <Route path="/CodConfirm" element={<CodConfirm />} />
         </Routes>
     </Router>
   )

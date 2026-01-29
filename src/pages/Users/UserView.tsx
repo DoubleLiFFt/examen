@@ -31,16 +31,6 @@ export default function UserView() {
                         </div>
                     </section>
                 </div>
-                <footer className="mt-12 pt-8 border-t border-[#2a2a2a]">
-                    <div className="max-w-8xl mx-auto">
-                        <h3 className="text-center text-xl font-semibold text-emerald-400 mb-8">
-                            Ajustes de Cuenta
-                        </h3>
-                        <div className="bg-[#1e1e1e] p-2 md:p-6 rounded-3xl shadow-xl border border-[#2a2a2a]">
-                            <CamContra />
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
     );

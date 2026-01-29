@@ -9,16 +9,19 @@ export default function CamContra() {
     };
 
     return (
-        <section className="flex items-center justify-center p-4">
-            <div className="bg-[#1e1e1e] border border-[#2a2a2a] shadow-2xl grid gap-10 p-8 md:p-12 rounded-2xl max-w-md w-full">
-                <h1 className="text-3xl font-bold text-center text-white">
-                    Restablecer Contraseña
-                </h1>
+        <section className="min-h-screen flex items-center justify-center bg-[#121212] px-4">
+            <div className="bg-[#1e1e1e] border border-[#2a2a2a] shadow-2xl p-10 md:p-14 rounded-3xl max-w-2xl w-full">
+                <header className="mb-10 text-center">
+                    <h1 className="text-4xl font-bold text-white mb-2">
+                        Cambiar contraseña
+                    </h1>
+                </header>
+
                 <form
                     onSubmit={submit}
-                    className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-6 gap-y-4 items-center"
+                    className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-6 gap-y-6 items-center"
                 >
-                    <label className="text-gray-400 text-left md:text-right md:font-medium md:pr-4">
+                    <label className="text-gray-400 text-left md:text-right md:font-medium text-lg">
                         Correo Electrónico:
                     </label>
                     <input
@@ -26,9 +29,9 @@ export default function CamContra() {
                         name="email"
                         required
                         placeholder="Email"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 rounded-lg pl-3 py-2 pr-4 w-full focus:ring-2 focus:ring-emerald-500 outline-none placeholder:text-gray-600"
+                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-base w-full"
                     />
-                    <label className="text-gray-400 text-left md:text-right md:font-medium md:pr-4">
+                    <label className="text-gray-400 text-left md:text-right md:font-medium text-lg">
                         Nueva Contraseña:
                     </label>
                     <input
@@ -36,21 +39,25 @@ export default function CamContra() {
                         name="newPassword"
                         required
                         placeholder="Password"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 rounded-lg pl-3 py-2 pr-4 w-full focus:ring-2 focus:ring-emerald-500 outline-none placeholder:text-gray-600"
+                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-base w-full"
                     />
-                    <label className="text-gray-400 text-left md:text-right md:font-medium md:pr-4">
+                    <label className="text-gray-400 text-left md:text-right md:font-medium text-lg">
                         Confirmar Contraseña:
                     </label>
                     <input
                         type="password"
                         name="confirmPassword"
                         required
-                        placeholder="New Password"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 rounded-lg pl-3 py-2 pr-4 w-full focus:ring-2 focus:ring-emerald-500 outline-none placeholder:text-gray-600"
+                        placeholder="Password"
+                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-base w-full"
                     />
-                    <div className="md:col-span-2 flex justify-center pt-4">
-                        <Button variant="primary" type="submit">
-                            Restablecer
+                    <div className="md:col-span-2 flex justify-center pt-6">
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="w-full py-4 text-lg font-bold"
+                        >
+                            Actualizar Contraseña
                         </Button>
                     </div>
                 </form>
