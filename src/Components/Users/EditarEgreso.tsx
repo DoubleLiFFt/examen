@@ -16,13 +16,24 @@ export default function DetailsTable() {
                         <tr
                             className="border-b border-[#252525] hover:bg-[#252525] transition-colors"
                         >
-                            <td className="px-4 py-4 text-center text-sm"><p>2026-01-29</p></td>
-                            <td className="px-4 py-4 text-center font-medium text-gray-400">
+                            <td className="px-4 py-4 text-center text-sm">
+                                <input type="date" />
+                            </td>
+                            <td className="px-4 py-4 text-center font-medium text-red-400">
                                 S/. <input type="number" className="p-2 rounded-2xl appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:_textfield]"/>
                             </td>
                             <td className="px-4 py-4 text-center">
                                     <span className="bg-emerald-900/30 text-emerald-400 px-2 py-1 rounded-md text-xs border border-emerald-800/20">
-                                        Comida
+                                        <select>
+                                            <option value="">Categoria</option>
+                                            <option value="comida">Comida</option>
+                                            <option value="transporte">Transporte</option>
+                                             <option value="vivienda">Vivienda</option>
+                                             <option value="ocio">Ocio</option>
+                                             <option value="salud">Salud</option>
+                                             <option value="educacion">Educación</option>
+                                             <option value="otros">Otros</option>
+                                         </select>
                                     </span>
                             </td>
                             <td className="px-4 py-4 text-center text-sm italic text-gray-400">
