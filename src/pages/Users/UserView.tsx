@@ -1,8 +1,8 @@
 import DetailsTable from "../../Components/Users/DetailsTable";
 import Graphic from "../../Components/Users/Graphic";
 import AddDetails from "../../Components/Users/AddDetails.tsx";
-import CamContra from "../../Components/Users/CamContra.tsx";
 import MisEgresos from "../../Components/Users/MisEgresos.tsx";
+import EditarEgreso from "../../Components/Users/EditarEgreso.tsx";
 
 export default function UserView() {
     return (
@@ -32,6 +32,9 @@ export default function UserView() {
                         </div>
                     </section>
                 </div>
+            </div>
+            <div className="flex flex-row bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 max-w-7xl mx-auto space-y-8 mt-10">
+                <EditarEgreso />
             </div>
             <div>
                 <MisEgresos/>
