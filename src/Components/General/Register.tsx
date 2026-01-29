@@ -7,7 +7,7 @@ export default function Register() {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("Nueva cuenta creada");
-        navigate("/confirCorreo");
+        navigate("/CorreoConfirm");
     };
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#121212] px-4">

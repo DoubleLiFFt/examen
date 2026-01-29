@@ -9,6 +9,7 @@ import Register from "./Components/General/Register.tsx";
 import ConfirCorreo from "./Components/General/confirCorreo.tsx";
 import CamContra from "./Components/Users/CamContra.tsx"
 import CodConfirm from "./Components/General/CodConfirm.tsx";
+import CorreoConfirm from "./Components/General/CorreoConfirm.tsx";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/confirCorreo" element={<ConfirCorreo />} />
             <Route path="/CamContra" element={<CamContra />} />
             <Route path="/CodConfirm" element={<CodConfirm />} />
+            <Route path="/CorreoConfirm" element={<CorreoConfirm />} />
         </Routes>
     </Router>
   )
