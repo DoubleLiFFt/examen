@@ -3,7 +3,7 @@ export type GastosUsers = {
   date: string;
   category: string;
   description: string;
-  mount: number; // Asegúrate que sea 'mount'
+  mount: number;
 };
 
 export const listaGastosDB: GastosUsers[] = [

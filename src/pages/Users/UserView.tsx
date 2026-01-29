@@ -23,7 +23,7 @@ export default function UserView() {
                         </div>
                     </section>
                     <section className="lg:col-span-2 bg-[#1e1e1e] p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center justify-between">
-                        <h2 className="text-xl font-semibold mb-6 text-emerald-400 text-center">Distribución de Gastos</h2>
+                        <h2 className="text-xl font-semibold mb-6 text-emerald-400 text-center">Gráfica de Gastos</h2>
                         <div className="w-full aspect-square max-w-[400px] flex items-center justify-center relative">
                             <Graphic />
                         </div>
