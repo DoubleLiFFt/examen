@@ -7,13 +7,14 @@ export default function CodConfirm() {
     const cod = "435286"
     console.log(cod)
     const submit = (e: React.FormEvent<HTMLFormElement>)=> {
+        e.preventDefault()
         const data = new FormData(e.currentTarget);
         const codigo = data.get("cod")?.toString();
         if (cod !== codigo) {
             alert("Codigo incorrecto")
         } else {
             console.log("Cambia tu contraseña.")
-            navigate("/confirCorreo")
+            navigate("/CamContra")
         }
     }
     return (
@@ -37,11 +38,9 @@ export default function CodConfirm() {
                             />
                         </div>
                     </div>
-                    <Link to="/CamContra">
-                        <Button variant="primary">
-                            Recuperar Contraseña
-                        </Button>
-                    </Link>
+                    <Button variant="primary" type="submit">
+                        Recuperar Contraseña
+                    </Button>
                 </form>
             </div>
         </section>
