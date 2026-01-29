@@ -11,7 +11,7 @@ export default function FiltroUsuarios({ alFiltrar }: PropsFiltro) {
 
     return (
         <div className="mb-6">
-            <h1 className="text-3xl font-bold mb-6 text-emerald-600 text-center">Gestión de Usuarios</h1>
+            <h1 className="text-3xl font-bold mb-6 text-emerald-600 text-center py-3">Gestión de Usuarios</h1>
 
             <div className="flex items-center gap-4 mb-4">
                 <select
