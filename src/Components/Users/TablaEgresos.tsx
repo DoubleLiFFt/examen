@@ -9,27 +9,38 @@ export default function TablaEgresos({ lista }: TablaEgresosProps) {
     const datosAMostrar = lista || listaGastosDB;
 
     return (
-        <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-center bg-[#1e1e1e] text-white">
+        <div className="w-full overflow-x-auto rounded-xl">
+            <table className="w-full border-collapse bg-[#1e1e1e] text-white">
                 <thead>
-                    <tr className="text-gray-400 font-extralight border-b border-gray-700">
-                        <th className="p-2">Fecha</th>
-                        <th className="p-2">Categoría</th>
-                        <th className="p-2">Descripción</th>
-                        <th className="p-2">Monto</th>
-                    </tr>
+                <tr className="text-gray-400 text-xs md:text-sm uppercase tracking-widest border-b border-[#2a2a2a]">
+                    <th className="p-4 text-left hidden md:table-cell">Fecha</th>
+                    <th className="p-4 text-left">Categoría</th>
+                    <th className="p-4 text-left hidden sm:table-cell">Descripción</th>
+                    <th className="p-4 text-right">Monto</th>
+                </tr>
                 </thead>
-                <tbody>
-                    {datosAMostrar.map((egreso, index) => (
-                        <tr key={index} className="border-t border-gray-800 hover:bg-gray-800">
-                            <td className="p-2">{egreso.date}</td>
-                            <td className="p-2">{egreso.category}</td>
-                            <td className="p-2">{egreso.description}</td>
-                            <td className="p-2 text-red-400 font-semibold">
-                                S/ {Number(egreso.mount).toFixed(2)}
-                            </td>
-                        </tr>
-                    ))}
+                <tbody className="divide-y divide-[#2a2a2a]">
+                {datosAMostrar.map((egreso, index) => (
+                    <tr key={index} className="hover:bg-[#252525] transition-colors group">
+                        <td className="p-4 text-sm text-gray-500 hidden md:table-cell">
+                            {egreso.date}
+                        </td>
+                        <td className="p-4">
+                                <span className="font-medium text-gray-200 block md:inline">
+                                    {egreso.category}
+                                </span>
+                            <span className="text-[10px] text-gray-500 md:hidden block mt-1">
+                                    {egreso.date}
+                                </span>
+                        </td>
+                        <td className="p-4 text-sm text-gray-400 hidden sm:table-cell">
+                            {egreso.description}
+                        </td>
+                        <td className="p-4 text-right font-mono font-bold text-red-500">
+                            S/ {Number(egreso.mount).toFixed(2)}
+                        </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>

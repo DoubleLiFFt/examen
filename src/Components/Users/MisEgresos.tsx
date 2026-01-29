@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import FiltrosEgresos from './FiltrosEgresos';
 import TablaEgresos from './TablaEgresos';
-
 import { listaGastosDB, type GastosUsers } from '../types/GastosUsers';
 
 export default function MisEgresos() {
@@ -24,11 +23,17 @@ export default function MisEgresos() {
     };
 
     return (
-        <div className="border border-gray-800 bg-[#1e1e1e] p-8 rounded-3xl mb-12 mx-22 mt-12">
-            <h1 className="text-emerald-500 text-xl mb-6">Mis Gastos</h1>
-            <h1 className="text-emerald-500 text-3xl font-bold mb-6 py-4 text-center">Gestion de Gastos</h1>
-            <FiltrosEgresos onFiltrar={filtrarEgresos} />
-            <TablaEgresos lista={egresosFiltrados} />
+        <div className="max-w-7xl mx-auto border border-[#2a2a2a] bg-[#1e1e1e] p-4 md:p-10 rounded-2xl md:rounded-3xl mb-12 mt-8 md:mt-12 shadow-xl">
+            <div className="mb-8 border-b border-[#2a2a2a] pb-6">
+                <p className="text-emerald-500 text-xs uppercase tracking-widest font-bold mb-2">Historial de movimientos</p>
+                <h1 className="text-white text-2xl md:text-3xl font-bold">Gestión de Gastos</h1>
+            </div>
+            <div className="mb-10">
+                <FiltrosEgresos onFiltrar={filtrarEgresos} />
+            </div>
+            <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] overflow-hidden">
+                <TablaEgresos lista={egresosFiltrados} />
+            </div>
         </div>
     );
 }

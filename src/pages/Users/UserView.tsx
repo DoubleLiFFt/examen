@@ -9,23 +9,24 @@ export default function UserView() {
     return (
         <div className="min-h-screen bg-[#121212] text-gray-200 p-4 md:p-8">
             <div className="max-w-7xl mx-auto space-y-8">
-                <header className="flex flex-row justify-between items-center bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30">
-                    <div>
-                        <h1 className="text-3xl font-bold text-white">Panel de Finanzas</h1>
-                        <p className="text-gray-400">Gestiona tus ingresos y egresos del mes</p>
+                <header className="flex flex-col md:flex-row justify-between items-center bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 gap-6">
+                    <div className="text-center md:text-left">
+                        <h1 className="text-2xl md:text-3xl font-bold text-white">Panel de Finanzas</h1>
+                        <p className="text-gray-400 text-sm md:text-base">Gestiona tus ingresos y egresos del mes</p>
                     </div>
                     <AddDetails />
                 </header>
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                    <section className="lg:col-span-3 bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-[#2a2a2a] overflow-hidden flex flex-col">
+                    {/* Tabla: Ocupa todo el ancho en móvil, 3 columnas en LG */}
+                    <section className="order-2 lg:order-1 lg:col-span-3 bg-[#1e1e1e] p-4 md:p-6 rounded-2xl shadow-lg border border-[#2a2a2a] overflow-hidden flex flex-col">
                         <h2 className="text-xl font-semibold mb-4 text-emerald-400">Gastos recientes</h2>
-                        <div className="flex-grow">
+                        <div className="overflow-x-auto">
                             <DetailsTable />
                         </div>
                     </section>
-                    <section className="lg:col-span-2 bg-[#1e1e1e] p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center justify-between">
+                    <section className="order-1 lg:order-2 lg:col-span-2 bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center justify-between">
                         <h2 className="text-xl font-semibold mb-6 text-emerald-400 text-center">Gráfica de Gastos</h2>
-                        <div className="w-full aspect-square max-w-[400px] flex items-center justify-center relative">
+                        <div className="w-full aspect-square max-w-[320px] md:max-w-[400px] flex items-center justify-center relative">
                             <Graphic />
                         </div>
                         <div className="mt-4 w-full border-t border-[#2a2a2a] pt-4 text-center">
@@ -33,15 +34,17 @@ export default function UserView() {
                         </div>
                     </section>
                 </div>
-            </div>
-            <div className="flex flex-row bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 max-w-7xl mx-auto space-y-8 mt-10">
-                <EditarEgreso />
-            </div>
-            <div className="flex flex-row justify-center bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 max-w-7xl mx-auto space-y-8 mt-10">
-                <ExportarGastos />
-            </div>
-            <div>
-                <MisEgresos/>
+                <div className="grid grid-cols-1 gap-8">
+                    <div className="bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 w-full overflow-x-auto">
+                        <EditarEgreso />
+                    </div>
+                    <div className="bg-[#1e1e1e] p-6 rounded-2xl shadow-lg border border-emerald-900/30 w-full flex justify-center">
+                        <ExportarGastos />
+                    </div>
+                    <div className="w-full">
+                        <MisEgresos/>
+                    </div>
+                </div>
             </div>
         </div>
     );
