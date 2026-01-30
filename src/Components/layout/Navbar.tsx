@@ -17,7 +17,7 @@ export default function Navbar() {
                     $
                 </div>
                 <Link to="/" className="text-lg md:text-xl font-bold tracking-tighter text-white hover:text-emerald-400 transition-colors">
-                    FINANZAS<span className="text-emerald-500">APP</span>
+                    CUIDAR<span className="text-sky-600">$</span>
                 </Link>
             </div>
             <div className="flex items-center gap-3 md:gap-6">
