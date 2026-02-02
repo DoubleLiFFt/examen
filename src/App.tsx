@@ -11,7 +11,6 @@ import CamContra from "./Components/Users/CamContra.tsx"
 import CodConfirm from "./Components/General/CodConfirm.tsx";
 import CorreoConfirm from "./Components/General/CorreoConfirm.tsx";
 import Perfil from "./pages/Users/Perfil.tsx";
-import Cuenta from "./pages/Users/Cuenta.tsx";
 import Configuracion from "./pages/Users/Configuracion.tsx";
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
             <Route path="/CodConfirm" element={<CodConfirm />} />
             <Route path="/CorreoConfirm" element={<CorreoConfirm />} />
             <Route path="/Perfil" element={<Perfil />} />
-            <Route path="/Cuenta" element={<Cuenta />} />
             <Route path="/Configuracion" element={<Configuracion />} />
         </Routes>
     </Router>
