@@ -1,6 +1,7 @@
 import Button from "../example/Button.tsx";
 import * as React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import {CredentialsLogin} from "../types/CredentialsLogin.ts";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -10,20 +11,16 @@ export default function Login() {
         const data = new FormData(e.currentTarget);
         const emailIngresado = data.get("email");
         const passwordIngresado = data.get("password");
-        const User = {
-            email: "prueba@gmail.com",
-            password: "prueba"
-        };
-        const Admin = {
-            email: "admin@gmail.com",
-            password: "admin"
-        };
-        if (emailIngresado === User.email && passwordIngresado === User.password) {
-            sessionStorage.setItem("userRole", "user");
-            navigate("/UserView");
-        } else if (emailIngresado === Admin.email && passwordIngresado === Admin.password) {
-            sessionStorage.setItem("userRole", "admin");
-            navigate("/AdminView");
+        const usuarioEncontrado = CredentialsLogin.find(
+            (u) => u.email === emailIngresado && u.password === passwordIngresado
+        )
+        if (usuarioEncontrado) {
+            sessionStorage.setItem("userRole", usuarioEncontrado.userRole)
+            if (usuarioEncontrado.userRole === "admin") {
+                navigate("/AdminView");
+            } else {
+                navigate("/UserView");
+            }
         } else {
             alert("Usuario o contraseña incorrectas");
         }
