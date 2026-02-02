@@ -15,6 +15,8 @@ export default function Login() {
             (u) => u.email === emailIngresado && u.password === passwordIngresado
         )
         if (usuarioEncontrado) {
+            sessionStorage.setItem("email", usuarioEncontrado.email);
+            sessionStorage.setItem("username", usuarioEncontrado.username)
             sessionStorage.setItem("userRole", usuarioEncontrado.userRole)
             if (usuarioEncontrado.userRole === "admin") {
                 navigate("/AdminView");

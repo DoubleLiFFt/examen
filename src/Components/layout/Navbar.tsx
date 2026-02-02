@@ -5,9 +5,11 @@ import NotificationBell from './NotificationBell';
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const isLoggedIn = sessionStorage.getItem("userRole");
+    const isLoggedIn = sessionStorage.getItem("username");
     const handleLogout = () => {
+        sessionStorage.removeItem("username");
         sessionStorage.removeItem("userRole");
+        sessionStorage.removeItem("email");
         navigate("/Login");
     };
     const [isOpen, setIsOpen] = React.useState(false);
@@ -25,7 +27,6 @@ export default function Navbar() {
                 </Link>
             </div>
             <div className="flex gap-8 items-center">
-                <NotificationBell />
                 {!isLoggedIn? (
                     <>
                         <Link to="/Login">
@@ -41,6 +42,7 @@ export default function Navbar() {
                     </>
                 ) : (
                     <div className="flex flex-row gap-12 items-center">
+                        <NotificationBell />
                         <div className="flex items-center gap-4 bg-emerald-400 px-8 py-6 rounded-full">
                             <div className="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></div>
                             <span className="font-bold text-sky-800 ">{isLoggedIn.toUpperCase()}</span>
