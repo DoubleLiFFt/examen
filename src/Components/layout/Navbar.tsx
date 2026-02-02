@@ -5,9 +5,11 @@ import NotificationBell from './NotificationBell';
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const isLoggedIn = sessionStorage.getItem("userRole");
+    const isLoggedIn = sessionStorage.getItem("username");
     const handleLogout = () => {
+        sessionStorage.removeItem("username");
         sessionStorage.removeItem("userRole");
+        sessionStorage.removeItem("email");
         navigate("/Login");
     };
     const [isOpen, setIsOpen] = React.useState(false);
@@ -24,7 +26,7 @@ export default function Navbar() {
                     </h1>
                 </Link>
             </div>
-            <div className="flex gap-8">
+            <div className="flex gap-8 items-center">
                 {!isLoggedIn? (
                     <>
                         <Link to="/Login">
@@ -40,6 +42,7 @@ export default function Navbar() {
                     </>
                 ) : (
                     <div className="flex flex-row gap-12 items-center">
+                        <NotificationBell />
                         <div className="flex items-center gap-4 bg-emerald-400 px-8 py-6 rounded-full">
                             <div className="w-2 h-2 rounded-full bg-emerald-800 animate-pulse"></div>
                             <span className="font-bold text-sky-800 ">{isLoggedIn.toUpperCase()}</span>
@@ -74,11 +77,11 @@ export default function Navbar() {
                                     </svg>
                                 </button>
                                 <div className="flex flex-col gap-4 mt-8 text-white">
-                                    <span onClick={() => navigate("/Login")} className="relative px-6 py-4 text-white hover:bg-gray-800/50 transition-colors group hover:cursor-pointer">
+                                    <span onClick={() => navigate("/UserView")} className="relative px-6 py-4 text-white hover:bg-gray-800/50 transition-colors group hover:cursor-pointer">
                                         <div className="absolute left-0 top-0 h-full w-1 bg-emerald-500 scale-y-0 group-hover:scale-y-100 transition-all origin-bottom"></div>
                                         <span className="font-bold tracking-widest">INICIO</span>
                                     </span>
-                                    <span onClick={() => navigate("/Register")} className="relative px-6 py-4 text-white hover:bg-gray-800/50 transition-colors group hover:cursor-pointer">
+                                    <span onClick={() => navigate("/Perfil")} className="relative px-6 py-4 text-white hover:bg-gray-800/50 transition-colors group hover:cursor-pointer">
                                         <div className="absolute left-0 top-0 h-full w-1 bg-emerald-500 scale-y-0 group-hover:scale-y-100 transition-all origin-bottom"></div>
                                         <span className="font-bold tracking-widest">PERFIL</span>
                                     </span>
