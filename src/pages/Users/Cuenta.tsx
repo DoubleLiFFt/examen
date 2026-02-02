@@ -1,4 +1,3 @@
-import CamContra from "../../Components/Users/CamContra.tsx";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 
@@ -19,16 +18,30 @@ export default function Cuenta() {
                     <span className="font-bold tracking-widest">CONFIGURACIÓN</span>
                 </span>
             </div>
-            <div className="col-span-3 bg-[#121212]">
+            <div className="grid col-span-3 bg-[#121212] gap-12 items-center justify-center w-full">
                 <div className="flex flex-col items-center">
                     <h1 className="text-white font-bold text-9xl">IMAGEN</h1>
                     <span className="text-white font-bold text-6xl tracking-widest">{accountUsername?.toUpperCase()}</span>
                 </div>
-                <div>
-                    <span className="text-white font-bold tracking-widest text-2xl">{accountEmail?.toUpperCase()}</span>
-                    <span className="text-white font-bold tracking-widest text-2xl">{accountRole?.toUpperCase()}</span>
+                <div className="flex flex-col items-center gap-8">
+                    <h1 className="text-white font-bold text-4xl">Datos de la Cuenta</h1>
+                    <table>
+                        <tbody className="text-white border">
+                            <tr className="border">
+                                <td className="border px-12 py-4">Usuario :</td>
+                                <td className="px-12 py-4 font-bold tracking-widest">{accountUsername?.toUpperCase()}</td>
+                            </tr>
+                            <tr className="border">
+                                <td className="border px-12 py-4">Correo :</td>
+                                <td className="px-12 py-4 font-bold tracking-widest">{accountEmail?.toUpperCase()}</td>
+                            </tr>
+                            <tr className="border">
+                                <td className="border px-12 py-4">Rol :</td>
+                                <td className="px-12 py-4 font-bold tracking-widest">{accountRole?.toUpperCase()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <CamContra />
             </div>
         </section>
     )
