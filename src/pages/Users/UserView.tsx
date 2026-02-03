@@ -16,15 +16,14 @@ export default function UserView() {
                     </div>
                     <AddDetails />
                 </header>
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                    {/* Tabla: Ocupa todo el ancho en móvil, 3 columnas en LG */}
-                    <section className="order-2 lg:order-1 lg:col-span-3 bg-[#1e1e1e] p-4 md:p-6 rounded-2xl shadow-lg border border-[#2a2a2a] overflow-hidden flex flex-col">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                    <section className="order-2 lg:order-1 lg:col-span-3 bg-[#1e1e1e] p-4 md:p-6 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col">
                         <h2 className="text-xl font-semibold mb-4 text-emerald-400">Gastos recientes</h2>
                         <div className="overflow-x-auto">
                             <DetailsTable />
                         </div>
                     </section>
-                    <section className="order-1 lg:order-2 lg:col-span-2 bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center justify-between">
+                    <section className="order-1 lg:order-2 lg:col-span-2 sticky top-8 bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center">
                         <h2 className="text-xl font-semibold mb-6 text-emerald-400 text-center">Gráfica de Gastos</h2>
                         <div className="w-full aspect-square max-w-[320px] md:max-w-[400px] flex items-center justify-center relative">
                             <Graphic />
