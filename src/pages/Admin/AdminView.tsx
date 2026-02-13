@@ -3,67 +3,73 @@ import CreateUserAdmin from "../../Components/Admin/CreateUserAdmin";
 import GraphicAdmin from "../../Components/Admin/GraphicAdmin.tsx";
 import HistorialAccesos from "../../Components/Admin/HistorialAccesos.tsx";
 import GestionUsuarios from "../../Components/Admin/GestionUsuarios.tsx";
+import { useState } from "react";
 
 function AdminView() {
+  const [isFiltering, setIsFiltering] = useState(false);
+
   return (
-    <div className="min-h-screen bg-[#121212] text-gray-200 p-3 sm:p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        <header className="flex flex-col md:flex-row justify-between items-center bg-[#1e1e1e] p-5 sm:p-6 md:p-8 rounded-3xl shadow-xl border border-emerald-900/30">
-          <div className="mb-4 sm:mb-6 md:mb-0 text-center md:text-left">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">
-              Panel de Administración
-            </h1>
-            <p className="text-emerald-500 font-medium">
-              Gestión de Usuarios y Sistemas
-            </p>
-          </div>
+      <div className="min-h-screen bg-[#121212] text-gray-200 p-3 sm:p-4 md:p-8 font-sans">
+        <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
 
-          <div className="w-full md:w-auto flex justify-center md:justify-end">
+          {/* Header - Se mantiene estático */}
+          <header className="flex flex-col md:flex-row justify-between items-center bg-[#1e1e1e] p-6 rounded-3xl shadow-xl border border-emerald-900/20">
+            <div className="text-center md:text-left">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                Panel de <span className="text-emerald-500">Administración</span>
+              </h1>
+              <p className="text-zinc-500 text-sm">Control total de usuarios y sistemas</p>
+            </div>
             <CreateUserAdmin />
-          </div>
-        </header>
+          </header>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 sm:gap-8">
-          <section className="xl:col-span-1 bg-[#1e1e1e] p-4 sm:p-6 rounded-3xl shadow-lg border border-[#2a2a2a] flex flex-col items-center">
-            <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-emerald-400 text-center">
-              Estado de usuarios
-            </h2>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
 
-            <div className="w-full max-w-[320px] sm:max-w-none aspect-square flex items-center justify-center">
-              <GraphicAdmin />
-            </div>
+            {/* SECCIÓN GRÁFICA: Comportamiento Sticky (Persistente) */}
+            {!isFiltering && (
+                <aside className="xl:col-span-1 sticky top-8 animate-in fade-in slide-in-from-left-4 duration-500">
+                  <section className="bg-[#1e1e1e] p-6 rounded-3xl shadow-2xl border border-[#2a2a2a] flex flex-col items-center">
+                    <h2 className="text-xs font-bold mb-6 text-emerald-400 uppercase tracking-[0.2em]">
+                      Estado de Usuarios
+                    </h2>
 
-            <div className="mt-4 sm:mt-6 p-4 bg-[#2a2a2a] rounded-2xl w-full text-center">
-              <p className="text-sm text-gray-400">Total Usuarios Registrados</p>
-              <p className="text-2xl font-bold text-white">30</p>
-            </div>
-          </section>
+                    <div className="w-full aspect-square flex items-center justify-center">
+                      <GraphicAdmin />
+                    </div>
 
-          <section className="xl:col-span-2 bg-[#1e1e1e] p-4 sm:p-6 rounded-3xl shadow-lg border border-[#2a2a2a] overflow-hidden">
-            <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6">
-              <h2 className="text-lg sm:text-xl font-semibold text-emerald-400">
-                Lista de usuarios
-              </h2>
+                    <div className="mt-6 p-5 bg-[#242424] rounded-2xl w-full text-center border border-zinc-800/50">
+                      <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest mb-1">
+                        Total Registrados
+                      </p>
+                      <p className="text-3xl font-bold text-white font-mono">30</p>
+                    </div>
+                  </section>
+                </aside>
+            )}
 
-              <span className="w-fit mx-auto sm:mx-0 bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full text-xs font-bold border border-emerald-500/20">
-                29 Clientes
-              </span>
-            </div>
-
-            <div className="-mx-4 sm:mx-0 overflow-x-auto">
-              <div className="min-w-[700px] px-4 sm:px-0">
-                <TableUsersAdmin />
+            {/* SECCIÓN TABLA: Se expande si isFiltering es true */}
+            <section className={`transition-all duration-700 ease-in-out bg-[#1e1e1e] p-5 sm:p-6 rounded-3xl shadow-xl border border-[#2a2a2a] ${
+                isFiltering ? "xl:col-span-3" : "xl:col-span-2"
+            }`}>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold text-emerald-400">Lista de Usuarios</h2>
+                {isFiltering && (
+                    <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-full border border-emerald-500/20 font-bold uppercase tracking-widest">
+                  Filtros activos
+                </span>
+                )}
               </div>
-            </div>
-          </section>
+
+              <div className="overflow-x-auto">
+                <TableUsersAdmin menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} />
+              </div>
+            </section>
+          </div>
+          <div className="pt-4">
+            <HistorialAccesos />
+          </div>
         </div>
       </div>
-
-      <div className="mt-6 sm:mt-8 space-y-6 sm:space-y-8">
-        <GestionUsuarios />
-        <HistorialAccesos />
-      </div>
-    </div>
   );
 }
 
