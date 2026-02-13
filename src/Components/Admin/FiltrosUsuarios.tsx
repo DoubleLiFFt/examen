@@ -7,7 +7,7 @@ interface PropsFiltro {
 export default function FiltroUsuarios({ alFiltrar }: PropsFiltro) {
     const [rolSeleccionado, setRolSeleccionado] = useState("-1");
 
-    const roles = ["Administrador", "Usuario", "Auditor"];
+    const roles = ["Administrador", "Usuario"];
 
     return (
         <div className="mb-6 px-4">
