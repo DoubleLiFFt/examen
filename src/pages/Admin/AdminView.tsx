@@ -1,8 +1,6 @@
 import TableUsersAdmin from "../../Components/Admin/TableUserAdmin";
 import CreateUserAdmin from "../../Components/Admin/CreateUserAdmin";
 import GraphicAdmin from "../../Components/Admin/GraphicAdmin.tsx";
-import HistorialAccesos from "../../Components/Admin/HistorialAccesos.tsx";
-import GestionUsuarios from "../../Components/Admin/GestionUsuarios.tsx";
 import { useState } from "react";
 
 function AdminView() {
@@ -24,8 +22,6 @@ function AdminView() {
           </header>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
-
-            {/* SECCIÓN GRÁFICA: Comportamiento Sticky (Persistente) */}
             {!isFiltering && (
                 <aside className="xl:col-span-1 sticky top-8 animate-in fade-in slide-in-from-left-4 duration-500">
                   <section className="bg-[#1e1e1e] p-6 rounded-3xl shadow-2xl border border-[#2a2a2a] flex flex-col items-center">
@@ -46,8 +42,6 @@ function AdminView() {
                   </section>
                 </aside>
             )}
-
-            {/* SECCIÓN TABLA: Se expande si isFiltering es true */}
             <section className={`transition-all duration-700 ease-in-out bg-[#1e1e1e] p-5 sm:p-6 rounded-3xl shadow-xl border border-[#2a2a2a] ${
                 isFiltering ? "xl:col-span-3" : "xl:col-span-2"
             }`}>
@@ -59,14 +53,10 @@ function AdminView() {
                 </span>
                 )}
               </div>
-
               <div className="overflow-x-auto">
                 <TableUsersAdmin menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} />
               </div>
             </section>
-          </div>
-          <div className="pt-4">
-            <HistorialAccesos />
           </div>
         </div>
       </div>
