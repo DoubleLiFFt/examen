@@ -12,7 +12,6 @@ import CodConfirm from "./Components/General/CodConfirm.tsx";
 import CorreoConfirm from "./Components/General/CorreoConfirm.tsx";
 import Perfil from "./pages/Users/Perfil.tsx";
 import Configuracion from "./pages/Users/Configuracion.tsx";
-import HistorialAccesosView from "./pages/Admin/HistorialAccesosView.tsx";
 
 function App() {
   return (
@@ -20,8 +19,6 @@ function App() {
         <Navbar />
         <Routes>
             <Route path="/" element={<GeneralView />} />
-            <Route path="/Navbar" element={<Navbar />} />
-            <Route path="/GeneralView" element={<GeneralView />} />
             <Route path="/AdminView" element={<AdminView />} />
             <Route path="/UserView" element={<UserView />} />
             <Route path="/Login" element={<Login />} />
@@ -32,7 +29,6 @@ function App() {
             <Route path="/CorreoConfirm" element={<CorreoConfirm />} />
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Configuracion" element={<Configuracion />} />
-            <Route path="/HistorialAccesosView" element={<HistorialAccesosView/>} />
         </Routes>
     </Router>
   )
