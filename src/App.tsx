@@ -18,8 +18,10 @@ function App() {
   return (
     <Router>
         <Navbar />
-        <GeneralView />
         <Routes>
+            <Route path="/" element={<GeneralView />} />
+            <Route path="/Navbar" element={<Navbar />} />
+            <Route path="/GeneralView" element={<GeneralView />} />
             <Route path="/AdminView" element={<AdminView />} />
             <Route path="/UserView" element={<UserView />} />
             <Route path="/Login" element={<Login />} />
