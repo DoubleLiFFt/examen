@@ -1,5 +1,6 @@
 import Button from "../example/Button.tsx";
 import React from "react";
+import { KeyRound, Mail, ShieldCheck } from "lucide-react";
 
 export default function CamContra() {
     const submit = (e: React.FormEvent) => {
@@ -9,59 +10,70 @@ export default function CamContra() {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center bg-[#121212] px-4 py-8">
-            <div className="bg-[#1e1e1e] border border-[#2a2a2a] shadow-2xl p-6 md:p-14 rounded-2xl md:rounded-3xl max-w-2xl w-full">
-                <header className="mb-8 md:mb-10 text-center">
-                    <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">
-                        Cambiar contraseña
-                    </h1>
-                </header>
-                <form
-                    onSubmit={submit}
-                    className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-x-6 gap-y-4 md:gap-y-6 items-start md:items-center"
-                >
-                    <label className="text-gray-400 text-left md:text-right md:font-medium text-sm md:text-lg">
-                        Correo Electrónico:
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="Email"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3 md:py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-sm md:text-base w-full"
-                    />
-                    <label className="text-gray-400 text-left md:text-right md:font-medium text-sm md:text-lg">
-                        Nueva Contraseña:
-                    </label>
-                    <input
-                        type="password"
-                        name="newPassword"
-                        required
-                        placeholder="Password"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3 md:py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-sm md:text-base w-full"
-                    />
-
-                    <label className="text-gray-400 text-left md:text-right md:font-medium text-sm md:text-lg">
-                        Confirmar Contraseña:
-                    </label>
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        required
-                        placeholder="Password"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white px-5 py-3 md:py-3.5 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all placeholder:text-gray-600 text-sm md:text-base w-full"
-                    />
-                    <div className="md:col-span-2 flex justify-center pt-4 md:pt-6">
-                        <Button
-                            variant="primary"
-                            type="submit"
-                            className="w-full py-3 md:py-4 text-base md:text-lg font-bold"
-                        >
-                            Actualizar Contraseña
-                        </Button>
-                    </div>
-                </form>
+        <div className="w-full">
+            <div className="flex justify-center mb-8">
+                <div className="p-4 bg-emerald-500/5 rounded-full border border-emerald-500/10">
+                    <KeyRound className="text-emerald-500" size={32} />
+                </div>
             </div>
-        </section>
+            <form onSubmit={submit} className="space-y-6">
+                <div className="space-y-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] ml-2">
+                        Verificar Identidad (Email)
+                    </label>
+                    <div className="relative group">
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-emerald-500 transition-colors" size={18} />
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder="ejemplo@correo.com"
+                            className="w-full bg-[#252525] border border-zinc-800 text-white pl-12 pr-5 py-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all placeholder:text-zinc-700 text-sm"
+                        />
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] ml-2">
+                            Nueva Contraseña
+                        </label>
+                        <div className="relative group">
+                            <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-emerald-500 transition-colors" size={18} />
+                            <input
+                                type="password"
+                                name="newPassword"
+                                required
+                                placeholder="••••••••"
+                                className="w-full bg-[#252525] border border-zinc-800 text-white pl-12 pr-5 py-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all placeholder:text-zinc-700 text-sm"
+                            />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] ml-2">
+                            Confirmar
+                        </label>
+                        <div className="relative group">
+                            <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-emerald-500 transition-colors" size={18} />
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                required
+                                placeholder="••••••••"
+                                className="w-full bg-[#252525] border border-zinc-800 text-white pl-12 pr-5 py-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all placeholder:text-zinc-700 text-sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="pt-4">
+                    <Button
+                        variant="primary"
+                        type="submit"
+                        className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-lg shadow-emerald-900/20 transition-all hover:scale-[1.02] active:scale-95"
+                    >
+                        Guardar cambios de seguridad
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 }
