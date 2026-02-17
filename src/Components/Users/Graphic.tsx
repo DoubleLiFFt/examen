@@ -1,13 +1,39 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { gastos } from "../types/Gastos";
+import { useEffect, useState } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Graphic() {
-    const details = gastos;
+interface Gasto {
+    id: number;
+    date: string;
+    mount: number;
+    category: string;
+    description: string;
+}
 
-    const resumenEgresos = details.reduce((acc, current) => {
+interface menuProps {
+    refreshSignal : number
+}
+
+export default function Graphic({refreshSignal} : menuProps) {
+    const [dataServidor, setDataServidor] = useState<Gasto[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/tablas")
+            .then(response => response.json())
+            .then((data: Gasto[]) => {
+                setDataServidor(data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error("Error cargando datos: ", error);
+                setIsLoading(false);
+            });
+    }, [refreshSignal]);
+
+    const resumenEgresos = dataServidor.reduce((acc, current) => {
         const cat = current.category || "Otros";
         acc[cat] = (acc[cat] || 0) + current.mount;
         return acc;
@@ -20,59 +46,82 @@ export default function Graphic() {
         labels: etiquetas,
         datasets: [
             {
-                label: 'Total Gastado (S/.)',
                 data: montos,
                 backgroundColor: [
-                    '#10b981', '#3b82f6', '#f59e0b',
-                    '#ef4444', '#8b5cf6', '#ec4899',
+                    '#10b981',
+                    '#3b82f6',
+                    '#f59e0b',
+                    '#ef4444',
+                    '#8b5cf6',
+                    '#ec4899',
+                    '#06b6d4',
                 ],
-                borderColor: '#1e1e1e',
-                borderWidth: 3,
-                hoverOffset: 15,
+                borderColor: '#141414',
+                borderWidth: 4,
+                hoverOffset: 20,
+                borderRadius: 5,
+                spacing: 2
             },
         ],
     };
-    const options = {
+    const options: ChartOptions<'doughnut'> = {
         plugins: {
             legend: {
-                display: window.innerWidth > 400,
-                position: 'bottom' as const,
+                display: true,
+                position: 'bottom',
                 labels: {
-                    color: '#9ca3af',
-                    padding: 15,
+                    color: '#71717a',
+                    padding: 20,
+                    usePointStyle: true,
+                    pointStyle: 'circle',
                     font: {
                         size: 11,
-                        weight: 'bold' as const
-                    },
-                    usePointStyle: true,
+                        family: 'Inter, sans-serif',
+                        weight: 'bold'
+                    }
                 },
             },
             tooltip: {
-                backgroundColor: '#2a2a2a',
+                enabled: true,
+                backgroundColor: '#18181b',
                 titleColor: '#10b981',
-                bodyColor: '#ffffff',
-                borderColor: '#3a3a3a',
-                borderWidth: 1,
+                titleFont: { size: 13, weight: 'bold' },
+                bodyColor: '#fafafa',
+                bodyFont: { size: 12 },
                 padding: 12,
+                cornerRadius: 12,
+                displayColors: true,
+                borderWidth: 1,
+                borderColor: '#27272a'
             }
         },
         responsive: true,
         maintainAspectRatio: false,
-        cutout: '75%',
+        cutout: '82%',
     };
+
+    if (isLoading) return (
+        <div className="w-full h-[350px] flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+        </div>
+    );
+
     return (
-        <div className="relative w-full h-[300px] md:h-[400px] flex items-center justify-center mx-auto">
-            {details.length > 0 ? (
-                <Doughnut data={chartData} options={options} />
+        <div className="relative w-full max-w-[450px] h-[350px] md:h-[400px] flex items-center justify-center mx-auto p-4">
+            {dataServidor.length > 0 ? (
+                <>
+                    <Doughnut data={chartData} options={options} />
+                    <div className="absolute flex flex-col items-center justify-center pointer-events-none translate-y-[-20px]">
+                        <span className="text-zinc-500 text-[10px] uppercase font-black tracking-[0.3em] mb-1">Total Gastos</span>
+                        <span className="text-3xl font-black text-white tracking-tighter">
+                            S/. {montos.reduce((a: number, b: number) => a + b, 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                        </span>
+                        <div className="h-1 w-8 bg-emerald-500 rounded-full mt-2 opacity-50"></div>
+                    </div>
+                </>
             ) : (
-                <p className="text-center text-gray-500 py-10 italic">Sin datos registrados</p>
-            )}
-            {details.length > 0 && (
-                <div className="absolute flex flex-col items-center justify-center translate-y-[-10px] md:translate-y-[-20px]">
-                    <span className="text-gray-500 text-[10px] md:text-xs uppercase font-black tracking-widest">Total</span>
-                    <span className="text-lg md:text-2xl font-bold text-white">
-                        S/. {montos.reduce((a, b) => a + b, 0).toLocaleString()}
-                    </span>
+                <div className="flex flex-col items-center gap-4 text-center">
+                    <p className="text-zinc-600 text-xs font-black uppercase tracking-widest italic">No hay datos para graficar</p>
                 </div>
             )}
         </div>

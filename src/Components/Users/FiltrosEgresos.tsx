@@ -11,13 +11,16 @@ export default function FiltrosEgresos({ onFiltrar }: FiltrosEgresosProps) {
     const [min, setMin] = useState("");
     const [max, setMax] = useState("");
 
+    const inputStyles = "w-full h-12 bg-[#252525] border border-zinc-800 text-zinc-300 px-4 rounded-xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all text-xs font-medium flex items-center [color-scheme:dark]";
+
     return (
-        <div className="flex flex-col gap-6 w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div className="flex flex-col gap-1">
-                    <label className="text-[10px] text-gray-500 uppercase font-bold ml-1">Categoría</label>
+        <div className="w-full bg-[#1e1e1e] p-6 rounded-2xl border border-[#2a2a2a]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+
+                <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Categoría</label>
                     <select
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white p-3 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all cursor-pointer text-sm"
+                        className={`${inputStyles} cursor-pointer appearance-none`}
                         value={cat}
                         onChange={(e) => setCat(e.target.value)}
                     >
@@ -31,49 +34,54 @@ export default function FiltrosEgresos({ onFiltrar }: FiltrosEgresosProps) {
                         <option>Otros</option>
                     </select>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[10px] text-gray-500 uppercase font-bold ml-1">Desde</label>
+
+                <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Desde</label>
                     <input
                         type="date"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white p-3 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-sm color-scheme-dark"
+                        className={inputStyles}
                         value={ini}
                         onChange={(e) => setIni(e.target.value)}
                     />
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[10px] text-gray-500 uppercase font-bold ml-1">Hasta</label>
+
+                <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Hasta</label>
                     <input
                         type="date"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white p-3 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-sm color-scheme-dark"
+                        className={inputStyles}
                         value={fin}
                         onChange={(e) => setFin(e.target.value)}
                     />
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[10px] text-gray-500 uppercase font-bold ml-1">Min (S/.)</label>
+
+                <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Mínimo (S/.)</label>
                     <input
                         type="number"
                         placeholder="0.00"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white p-3 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-sm placeholder:text-gray-600"
+                        className={inputStyles}
                         value={min}
                         onChange={(e) => setMin(e.target.value)}
                     />
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[10px] text-gray-500 uppercase font-bold ml-1">Max (S/.)</label>
+
+                <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-1">Máximo (S/.)</label>
                     <input
                         type="number"
                         placeholder="999.00"
-                        className="bg-[#2a2a2a] border border-[#3a3a3a] text-white p-3 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all text-sm placeholder:text-gray-600"
+                        className={inputStyles}
                         value={max}
                         onChange={(e) => setMax(e.target.value)}
                     />
                 </div>
             </div>
-            <div className="flex justify-end mt-2">
+
+            <div className="flex justify-end mt-8 pt-6 border-t border-zinc-800/50">
                 <button
                     onClick={() => onFiltrar(cat, ini, fin, min, max)}
-                    className="w-full md:w-auto bg-emerald-600 text-white px-10 py-3 rounded-xl font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/20 active:scale-95 text-sm uppercase tracking-widest"
+                    className="h-12 px-10 bg-white hover:bg-emerald-500 text-black font-black rounded-xl transition-all duration-300 active:scale-95 shadow-xl shadow-emerald-500/10 text-[10px] uppercase tracking-[0.2em]"
                 >
                     Aplicar Filtros
                 </button>

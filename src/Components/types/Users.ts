@@ -9,7 +9,7 @@ type Users = {
 
 export const usersAccounts: Users[] = [
     // MES 1: JUNIO 2025
-    { id: 1, email: "prueba1@gmail.com", username: "prueba1", password: "password1", createdTime: "2025-06-12", emailVerified: true },
+    { id: 1, email: "prueba@gmail.com", username: "prueba", password: "password", createdTime: "2025-06-12", emailVerified: true },
     { id: 2, email: "prueba2@gmail.com", username: "prueba2", password: "password2", createdTime: "2025-06-20", emailVerified: true },
     { id: 3, email: "prueba3@gmail.com", username: "prueba3", password: "password3", createdTime: "2025-06-28", emailVerified: false },
     { id: 4, email: "prueba4@gmail.com", username: "prueba4", password: "password4", createdTime: "2025-06-30", emailVerified: true },

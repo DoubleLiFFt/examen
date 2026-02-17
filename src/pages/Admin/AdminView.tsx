@@ -9,8 +9,6 @@ function AdminView() {
   return (
       <div className="min-h-screen bg-[#121212] text-gray-200 p-3 sm:p-4 md:p-8 font-sans">
         <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-
-          {/* Header - Se mantiene estático */}
           <header className="flex flex-col md:flex-row justify-between items-center bg-[#1e1e1e] p-6 rounded-3xl shadow-xl border border-emerald-900/20">
             <div className="text-center md:text-left">
               <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">

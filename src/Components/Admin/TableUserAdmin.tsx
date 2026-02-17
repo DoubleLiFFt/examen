@@ -1,6 +1,7 @@
 import { usersAccounts } from "../types/Users";
 import { Funnel } from "lucide-react";
 import GestionUsuarios from "./GestionUsuarios.tsx";
+import {useState} from "react";
 
 interface tableAdmin {
     menuAbierto: boolean,
@@ -8,14 +9,17 @@ interface tableAdmin {
 }
 
 export default function TableUsersAdmin({ menuAbierto, setMenuAbierto }: tableAdmin) {
+    const [isOpen, setIsOpen] = useState(false)
+
+    function open() {
+        setIsOpen(!isOpen)
+    }
 
     function handleClick() {
         setMenuAbierto(!menuAbierto);
     }
-
     return (
         <div className="flex flex-col gap-6 w-full h-full">
-            {/* Cabecera de la tabla con el Funnel siempre visible */}
             <div className="flex justify-between items-center bg-[#1e1e1e] p-4 rounded-t-xl border-b border-[#3a3a3a]">
                 <h1 className="text-xl md:text-2xl font-bold text-emerald-400">
                     {menuAbierto ? "Gestión Avanzada" : "Lista de Usuarios Registrados"}
@@ -61,12 +65,14 @@ export default function TableUsersAdmin({ menuAbierto, setMenuAbierto }: tableAd
                                     </td>
                                     <td className="px-4 md:px-6 py-4">
                                         <div className="flex justify-center items-center gap-2 md:gap-3">
-                                            <button className="text-emerald-500 hover:text-emerald-400 transition-all hover:scale-110 cursor-pointer p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </button>
-                                            <button className="text-blue-500 hover:text-blue-400 transition-all hover:scale-110 cursor-pointer p-1">
+                                            {isOpen && (
+                                                <button className="text-emerald-500 hover:text-emerald-400 transition-all hover:scale-110 cursor-pointer p-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                </button>
+                                            )}
+                                            <button className="text-blue-500 hover:text-blue-400 transition-all hover:scale-110 cursor-pointer p-1" onClick={ open }>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill="currentColor">
                                                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                                 </svg>

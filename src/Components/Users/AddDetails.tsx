@@ -1,8 +1,42 @@
 import Button from "../example/Button.tsx";
+import React from "react";
 
-export default function AddDetails() {
+interface addProps {onAddSuccess: () => void}
+
+export default function AddDetails({onAddSuccess} : addProps) {
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const form =e.currentTarget
+        const formData = new FormData(e.currentTarget)
+        const nuevoGasto = {
+            date : formData.get("date"),
+            mount : parseFloat(formData.get("mount") as string),
+            category : formData.get("category"),
+            description : formData.get("description"),
+        };
+        try {
+            const response = await fetch("http://127.0.0.1:8000/rellenarTabla", {
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json",
+                },
+                body : JSON.stringify(nuevoGasto)
+            });
+            if (response.ok) {
+                const result = await response.json();
+                console.log("Exito", result);
+                alert("Gasto agregado correctamente.");
+                form.reset()
+                onAddSuccess()
+            } else {
+                alert("Error al registrar un gasto.")
+            }
+        } catch (error) {
+            console.error("Error de red.", error)
+        }
+    }
     return (
-        <form className="flex flex-col md:flex-row gap-3 items-center w-full md:w-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 items-center w-full md:w-auto">
             <input
                 type="date"
                 name="date"
