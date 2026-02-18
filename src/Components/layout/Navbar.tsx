@@ -78,6 +78,17 @@ export default function Navbar() {
                                         />
                                     </div>
                                 )}
+                                {useRole === "user" && (
+                                    <div className="mt-6 pt-6 border-t border-[#3a3a3a] w-full flex flex-col">
+                                        <p className="text-[10px] font-black text-emerald-500/60 tracking-[0.3em] mb-4 ml-6 uppercase">
+                                            Planificación de gastos
+                                        </p>
+                                        <NavItem
+                                            label="FILTRO DE ACCESOS"
+                                            onClick={() => { navigate("/PlanificacionGastosView"); toggle(); }}
+                                        />
+                                    </div>
+                                )}
                             </nav>
                             <button onClick={handleLogout} className="lg:hidden mt-auto w-full py-4 bg-red-900/10 border border-red-900/30 text-red-400 font-bold text-xs tracking-widest rounded-xl">
                                 FINALIZAR SESIÓN

@@ -13,6 +13,7 @@ import CorreoConfirm from "./Components/General/CorreoConfirm.tsx";
 import Perfil from "./pages/Users/Perfil.tsx";
 import Configuracion from "./pages/Users/Configuracion.tsx";
 import HistorialAccesosView from "./pages/Admin/HistorialAccesosView.tsx";
+import PlanificacionGastosView from "./pages/Users/PlanificacionGastosView.tsx"
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/Perfil" element={<Perfil />} />
             <Route path="/Configuracion" element={<Configuracion />} />
             <Route path="/HistorialAccesosView" element={<HistorialAccesosView />}/>
+            <Route path="/PlanificacionGastosView" element={<PlanificacionGastosView />}/>
         </Routes>
     </Router>
   )
