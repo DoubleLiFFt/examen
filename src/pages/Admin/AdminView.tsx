@@ -5,6 +5,9 @@ import { useState } from "react";
 
 function AdminView() {
   const [isFiltering, setIsFiltering] = useState(false);
+  const [refreshSignal, setRefreshSignal] = useState(0);
+
+  const triggerRefresh = () => setRefreshSignal(prev => prev + 1)
 
   return (
       <div className="min-h-screen bg-[#121212] text-gray-200 p-3 sm:p-4 md:p-8 font-sans">
@@ -16,7 +19,7 @@ function AdminView() {
               </h1>
               <p className="text-zinc-500 text-sm">Control total de usuarios y sistemas</p>
             </div>
-            <CreateUserAdmin />
+            <CreateUserAdmin onAddSuccess={triggerRefresh}/>
           </header>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
@@ -26,16 +29,8 @@ function AdminView() {
                     <h2 className="text-xs font-bold mb-6 text-emerald-400 uppercase tracking-[0.2em]">
                       Estado de Usuarios
                     </h2>
-
                     <div className="w-full aspect-square flex items-center justify-center">
-                      <GraphicAdmin />
-                    </div>
-
-                    <div className="mt-6 p-5 bg-[#242424] rounded-2xl w-full text-center border border-zinc-800/50">
-                      <p className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest mb-1">
-                        Total Registrados
-                      </p>
-                      <p className="text-3xl font-bold text-white font-mono">30</p>
+                      <GraphicAdmin refreshSignal={refreshSignal}/>
                     </div>
                   </section>
                 </aside>
@@ -52,7 +47,7 @@ function AdminView() {
                 )}
               </div>
               <div className="overflow-x-auto">
-                <TableUsersAdmin menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} />
+                <TableUsersAdmin menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} refreshSignal={refreshSignal}/>
               </div>
             </section>
           </div>
