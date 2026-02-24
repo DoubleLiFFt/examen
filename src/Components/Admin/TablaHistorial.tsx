@@ -1,12 +1,27 @@
+import { useEffect, useState } from "react";
 import { usersAccounts } from "../types/HistoUsers";
 import type { HistoUsers } from "../types/HistoUsers";
 
 interface TablaHistorialProps {
-    lista?: HistoUsers[];
+    refreshSignal : number
 }
 
-export default function TablaHistorial({ lista }: TablaHistorialProps) {
-    const datosAMostrar = lista || usersAccounts;
+export default function TablaHistorial({ refreshSignal }: TablaHistorialProps) {
+        const [listaMostrar, setListaMostrar] = useState<any[]>([])
+        const [dataServidor, setDataServidor] = useState<any[]>([])
+    
+        useEffect(() => {
+            fetch("http://127.0.0.1:8000/usersTablas")
+                .then(response => response.json())
+                .then(data => {
+                    setDataServidor(data)
+                    setListaMostrar(data)
+                })
+                .catch(error => console.error("Error cargando datos: ", error))
+        }, [refreshSignal]);
+    
+    const datosAMostrar = dataServidor || usersAccounts;
+    
 
     return (
         <div className="w-full overflow-x-auto rounded-xl">
