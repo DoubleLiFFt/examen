@@ -6,6 +6,7 @@ type ButtonProps = {
     variant?: "primary" | "secondary" | "tertiary" | "PrimaryLarge"
     onClick?: MouseEventHandler<HTMLButtonElement>
     className?: string;
+    disabled?: boolean;
 }
 
 export default function Button({
@@ -13,7 +14,8 @@ export default function Button({
                                    variant = "primary",
                                    type = "button",
                                    onClick,
-                                   className = ""
+                                   className = "",
+                                   disabled = false
 }: ButtonProps) {
 
     const base = "border rounded-full px-8 py-3 transition-all duration-150 hover:cursor-pointer"
@@ -31,6 +33,7 @@ export default function Button({
         <button
             type={type}
             onClick={onClick}
+            disabled={disabled}
             className={`${base} ${variants[variant]} ${className}`}
         >
             {children}

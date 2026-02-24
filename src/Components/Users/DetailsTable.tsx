@@ -7,9 +7,10 @@ interface menuProps {
     menuAbierto : (boolean),
     setMenuAbierto : (valor: boolean) => void,
     refreshSignal : number
+    onActionSuccess: () => void
 }
 
-export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal} : menuProps) {
+export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal, onActionSuccess} : menuProps) {
     const [dataServidor, setDataServidor] = useState<any[]>([])
     const [listaMostrar, setListraMostrar] = useState<any[]>([])
     const [isEditId, setIsEditId] = useState<number | null>(null)
@@ -28,6 +29,7 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
                 const nuevaLista = dataServidor.filter(g => g.id !== id);
                 setDataServidor(nuevaLista);
                 setListraMostrar(nuevaLista);
+                onActionSuccess();
                 console.log("Registro eliminado con éxito");
             } else {
                 alert("Error al intentar eliminar el registro.");
@@ -56,6 +58,7 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
                 const dataActualizada = dataServidor.map(g => g.id === tempData.id ? tempData : g);
                 setDataServidor(dataActualizada);
                 setListraMostrar(dataActualizada);
+                onActionSuccess();
             }
         } catch (error) {
             console.error("Error al editar", error);

@@ -26,7 +26,7 @@ export default function UserView() {
                     }`}>
                         <h2 className="text-xl font-semibold mb-4 text-emerald-400">Gastos recientes</h2>
                         <div className="overflow-x-auto">
-                            <DetailsTable menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} refreshSignal={refreshSignal}/>
+                            <DetailsTable menuAbierto={isFiltering} setMenuAbierto={setIsFiltering} refreshSignal={refreshSignal} onActionSuccess={triggerRefresh}/>
                         </div>
                     </section>
                     {!isFiltering && (

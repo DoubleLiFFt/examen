@@ -1,13 +1,56 @@
 import Button from "../example/Button.tsx";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
+import { useState } from "react";
 
 export default function Register() {
     const navigate = useNavigate();
-    const submit = (e: React.FormEvent) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Nueva cuenta creada");
-        navigate("/CorreoConfirm");
+        setIsLoading(true);
+
+        // 1. Capturamos los datos del formulario de forma limpia
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            username: formData.get("username"),
+            email: formData.get("email"),
+            password: formData.get("password")
+        };
+
+        console.log("JSON enviado:", JSON.stringify(data));
+
+        try {
+            // 2. Petición al endpoint de registro en FastAPI
+            const response = await fetch("http://127.0.0.1:8000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log("Éxito:", result.message);
+                // Si el registro y el envío de correo fueron exitosos
+                navigate("/CorreoConfirm");
+            } else {
+                // Capturamos el error detallado de FastAPI (CORS o validación 422)
+                const errorDetail = await response.json();
+                console.error("Error del servidor:", errorDetail);
+
+                // Mostramos el error específico si existe, o uno genérico
+                const msg = errorDetail.detail ? JSON.stringify(errorDetail.detail) : "Error al crear la cuenta";
+                alert(`Error: ${msg}`);
+            }
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            alert("No se pudo conectar con el servidor. Verifica que FastAPI esté corriendo.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -22,7 +65,7 @@ export default function Register() {
                             </div>
                             <span className="text-emerald-500 font-bold tracking-[0.2em] text-xs uppercase">New Account</span>
                         </div>
-                        <h1 className="text-5xl font-black text-white tracking-tighter mb-4">ÚNETE AHORA</h1>
+                        <h1 className="text-5xl font-black text-white tracking-tighter mb-4 uppercase leading-none">Únete Ahora</h1>
                         <p className="text-zinc-500 font-medium text-lg">Gestiona tus finanzas con precisión milimétrica.</p>
                     </header>
 
@@ -34,7 +77,7 @@ export default function Register() {
                                     name="username"
                                     type="text"
                                     required
-                                    placeholder="username"
+                                    placeholder="Tu apodo o nombre"
                                     className="w-full bg-[#1c1c1c] border border-[#2a2a2a] text-white p-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all placeholder:text-zinc-800 font-medium"
                                 />
                             </div>
@@ -45,7 +88,7 @@ export default function Register() {
                                     name="email"
                                     type="email"
                                     required
-                                    placeholder="email"
+                                    placeholder="ejemplo@correo.com"
                                     className="w-full bg-[#1c1c1c] border border-[#2a2a2a] text-white p-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all placeholder:text-zinc-800 font-medium"
                                 />
                             </div>
@@ -56,7 +99,7 @@ export default function Register() {
                                     name="password"
                                     type="password"
                                     required
-                                    placeholder="password"
+                                    placeholder="••••••••"
                                     className="w-full bg-[#1c1c1c] border border-[#2a2a2a] text-white p-4 rounded-2xl focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all placeholder:text-zinc-800 font-medium"
                                 />
                             </div>
@@ -66,9 +109,14 @@ export default function Register() {
                             <Button
                                 variant="primary"
                                 type="submit"
-                                className="w-full py-5 rounded-2xl bg-white hover:bg-emerald-500 text-black font-black uppercase tracking-widest transition-all duration-300 transform active:scale-95 shadow-xl hover:shadow-emerald-500/25"
+                                disabled={isLoading}
+                                className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest transition-all duration-300 transform active:scale-95 shadow-xl ${
+                                    isLoading
+                                        ? "bg-zinc-800 text-zinc-500 cursor-not-allowed opacity-50"
+                                        : "bg-white hover:bg-emerald-500 text-black hover:shadow-emerald-500/25"
+                                }`}
                             >
-                                Crear mi cuenta
+                                {isLoading ? "Procesando..." : "Crear mi cuenta"}
                             </Button>
                         </div>
 
@@ -94,8 +142,8 @@ export default function Register() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-transparent to-transparent"></div>
                     <div className="absolute bottom-12 left-12 right-12 p-8 backdrop-blur-md bg-black/20 border border-white/5 rounded-3xl">
-                        <p className="text-white font-black text-2xl tracking-tighter leading-none mb-2">SEGURIDAD NIVEL ALPHA</p>
-                        <p className="text-emerald-500/80 text-xs font-bold uppercase tracking-[0.3em]">Encriptación de grado militar activa</p>
+                        <p className="text-white font-black text-2xl tracking-tighter leading-none mb-2 uppercase">Seguridad Nivel Alpha</p>
+                        <p className="text-emerald-500/80 text-xs font-bold uppercase tracking-[0.3em]">Protocolo de verificación activo</p>
                     </div>
                 </div>
             </div>

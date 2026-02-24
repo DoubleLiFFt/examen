@@ -4,8 +4,6 @@ import { FaBell } from 'react-icons/fa';
 const NotificationBell = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [notifications, setNotifications] = useState<string[]>([]);
-
-    // 1. Lógica para traer alertas reales del Backend
     const fetchAlertas = async () => {
         try {
             const response = await fetch("http://127.0.0.1:8000/alertasPresupuesto");
@@ -17,10 +15,8 @@ const NotificationBell = () => {
             console.error("Error al obtener notificaciones:", error);
         }
     };
-
     useEffect(() => {
         fetchAlertas();
-        // Opcional: Recargar cada 30 segundos para monitoreo en tiempo real
         const interval = setInterval(fetchAlertas, 30000);
         return () => clearInterval(interval);
     }, []);
