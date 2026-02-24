@@ -32,7 +32,7 @@ export default function UserView() {
                     {!isFiltering && (
                         <section className="order-1 lg:order-2 lg:col-span-2 sticky top-8 bg-[#1e1e1e] p-6 md:p-8 rounded-2xl shadow-lg border border-[#2a2a2a] flex flex-col items-center animate-in fade-in zoom-in duration-300">
                             <h2 className="text-xl font-semibold mb-6 text-emerald-400 text-center">Gráfica de Gastos</h2>
-                            <div className="w-full aspect-square max-w-[320px] md:max-w-[400px] flex items-center justify-center relative">
+                            <div className="w-full aspect-square max-w-[320px] md:max-w-100 flex items-center justify-center relative">
                                 <Graphic refreshSignal={refreshSignal}/>
                             </div>
                             <div className="mt-4 w-full border-t border-[#2a2a2a] pt-4 text-center">

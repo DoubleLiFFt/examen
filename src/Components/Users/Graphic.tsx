@@ -101,17 +101,17 @@ export default function Graphic({refreshSignal} : menuProps) {
     };
 
     if (isLoading) return (
-        <div className="w-full h-[350px] flex items-center justify-center">
+        <div className="w-full h-87.5 flex items-center justify-center">
             <div className="w-8 h-8 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
         </div>
     );
 
     return (
-        <div className="relative w-full max-w-[450px] h-[350px] md:h-[400px] flex items-center justify-center mx-auto p-4">
+        <div className="relative w-full max-w-112.5 h-87.5 md:h-100 flex items-center justify-center mx-auto p-4">
             {dataServidor.length > 0 ? (
                 <>
                     <Doughnut data={chartData} options={options} />
-                    <div className="absolute flex flex-col items-center justify-center pointer-events-none translate-y-[-20px]">
+                    <div className="absolute flex flex-col items-center justify-center pointer-events-none -translate-y-5">
                         <span className="text-zinc-500 text-[10px] uppercase font-black tracking-[0.3em] mb-1">Total Gastos</span>
                         <span className="text-3xl font-black text-white tracking-tighter">
                             S/. {montos.reduce((a: number, b: number) => a + b, 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}

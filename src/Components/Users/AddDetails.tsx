@@ -48,7 +48,7 @@ export default function AddDetails({onAddSuccess} : addProps) {
                 name="mount"
                 min="0"
                 placeholder="Monto"
-                className="bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 px-3 h-10 w-full md:w-24 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:_textfield] placeholder:text-gray-500"
+                className="bg-[#2a2a2a] border border-[#3a3a3a] text-gray-200 px-3 h-10 w-full md:w-24 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield] placeholder:text-gray-500"
             />
             <select
                 name="category"

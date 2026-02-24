@@ -73,14 +73,14 @@ export default function GeneralView() {
     const navigate = useNavigate()
     return (
         <div className="min-h-screen bg-[#121212] text-white font-sans">
-            <section className="relative h-[600px] w-full overflow-hidden">
+            <section className="relative h-150 w-full overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/Animals.jpeg"
                         alt="Hero Background"
                         className="w-full h-full object-cover opacity-60"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#121212]"></div>
+                    <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-[#121212]"></div>
                 </div>
                 <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
                     <h2 className="text-6xl md:text-8xl font-black tracking-tighter mb-4">

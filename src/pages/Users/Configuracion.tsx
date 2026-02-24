@@ -48,7 +48,7 @@ export default function Configuracion() {
                         </div>
                     </header>
                     <section className="bg-[#1e1e1e] rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden relative">
-                        <div className="h-1 w-full bg-gradient-to-r from-emerald-600 to-emerald-400/20"></div>
+                        <div className="h-1 w-full bg-linear-to-r from-emerald-600 to-emerald-400/20"></div>
                         <div className="p-8 md:p-12">
                             <CamContra />
                         </div>

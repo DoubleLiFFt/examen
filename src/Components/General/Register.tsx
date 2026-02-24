@@ -49,9 +49,9 @@ export default function Register() {
 
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8 font-sans">
-            <div className="flex flex-row-reverse bg-[#141414] border border-[#222] shadow-[0_0_60px_-15px_rgba(16,185,129,0.15)] rounded-[2.5rem] max-w-6xl w-full overflow-hidden min-h-[750px]">
+            <div className="flex flex-row-reverse bg-[#141414] border border-[#222] shadow-[0_0_60px_-15px_rgba(16,185,129,0.15)] rounded-[2.5rem] max-w-6xl w-full overflow-hidden min-h-187.5">
 
-                <div className="flex-1 p-8 md:p-16 flex flex-col justify-center bg-gradient-to-b from-[#141414] to-[#0f0f0f]">
+                <div className="flex-1 p-8 md:p-16 flex flex-col justify-center bg-linear-to-b from-[#141414] to-[#0f0f0f]">
                     <header className="mb-8">
                         <div className="flex items-center gap-2 mb-4">
                             <div className="w-8 h-8 bg-emerald-500 rounded-lg rotate-12 flex items-center justify-center shadow-lg shadow-emerald-500/20">
@@ -134,7 +134,7 @@ export default function Register() {
                         alt="Img"
                         className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 transform hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-[#141414] via-transparent to-transparent"></div>
                     <div className="absolute bottom-12 left-12 right-12 p-8 backdrop-blur-md bg-black/20 border border-white/5 rounded-3xl">
                         <p className="text-white font-black text-2xl tracking-tighter leading-none mb-2 uppercase">Seguridad Nivel Alpha</p>
                         <p className="text-emerald-500/80 text-xs font-bold uppercase tracking-[0.3em]">Protocolo de verificación activo</p>

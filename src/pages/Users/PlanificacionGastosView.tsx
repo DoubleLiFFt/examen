@@ -23,7 +23,7 @@ export default function PlanificacionGastosView() {
             const response = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual");
             if (response.ok) {
                 const data = await response.json();
-                setPresupuesto(data.limit_mount); // Seteamos el valor real de la DB
+                setPresupuesto(data.limit_mount);
             }
         } catch (error) {
             console.error("Error cargando presupuesto:", error);
@@ -58,7 +58,6 @@ export default function PlanificacionGastosView() {
         try {
             const response = await fetch("http://127.0.0.1:8000/alertasPresupuesto");
             if (response.ok) {
-                // Endpoint de alertas no retorna el limite, se asume persistencia manual o local inicial
             }
         } catch (error) {
             console.error(error);
@@ -115,7 +114,7 @@ export default function PlanificacionGastosView() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <div className="lg:col-span-5 bg-[#1e1e1e] border border-[#2a2a2a] rounded-[2.5rem] p-8 flex flex-col items-center justify-center relative min-h-[400px]">
+                    <div className="lg:col-span-5 bg-[#1e1e1e] border border-[#2a2a2a] rounded-[2.5rem] p-8 flex flex-col items-center justify-center relative min-h-100">
                         <div className="w-full h-full">
                             <Doughnut data={chartData} options={{ plugins: { legend: { display: false } }, maintainAspectRatio: false }} />
                         </div>

@@ -11,7 +11,7 @@ export default function CamContra() {
 
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8 font-sans">
-            <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.1)] rounded-[2.5rem] max-w-5xl w-full overflow-hidden min-h-[600px]">
+            <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.1)] rounded-[2.5rem] max-w-5xl w-full overflow-hidden min-h-150">
 
                 <div className="hidden lg:flex flex-1 relative bg-[#0f0f0f] overflow-hidden">
                     <img
@@ -19,7 +19,7 @@ export default function CamContra() {
                         alt="Security Background"
                         className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 hover:grayscale-0 transition-all duration-1000 transform hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#141414]"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#141414]"></div>
                     <div className="absolute inset-0 bg-emerald-500/5 mix-blend-overlay"></div>
 
                     <div className="relative z-10 m-auto p-12 text-center">
@@ -34,7 +34,7 @@ export default function CamContra() {
                 <div className="flex-1 p-8 md:p-16 flex flex-col justify-center">
                     <header className="mb-10">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="h-[2px] w-8 bg-emerald-500"></div>
+                            <div className="h-0.5 w-8 bg-emerald-500"></div>
                             <span className="text-emerald-500 font-black tracking-[0.3em] text-[10px] uppercase">Security Update</span>
                         </div>
                         <h1 className="text-4xl font-black text-white tracking-tighter mb-4">RESET PASSWORD</h1>

@@ -27,7 +27,6 @@ const NotificationBell = () => {
 
     return (
         <div className="relative inline-block">
-            {/* Ícono de Campana */}
             <div
                 className="cursor-pointer p-2 rounded-full hover:bg-zinc-800 transition-colors relative"
                 onClick={toggleNotifications}
@@ -36,16 +35,12 @@ const NotificationBell = () => {
                     size={22}
                     className={`${notifications.length > 0 ? 'text-amber-400 animate-pulse' : 'text-zinc-400'}`}
                 />
-
-                {/* Contador de notificaciones */}
                 {notifications.length > 0 && (
                     <span className="absolute top-1 right-1 bg-red-600 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border-2 border-[#141414]">
                         {notifications.length}
                     </span>
                 )}
             </div>
-
-            {/* Dropdown de Notificaciones */}
             {isOpen && (
                 <div className="absolute right-0 mt-3 w-72 bg-[#1e1e1e] border border-[#2a2a2a] rounded-2xl shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="p-4 border-b border-[#2a2a2a] flex justify-between items-center">

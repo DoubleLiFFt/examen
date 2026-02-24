@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import {Funnel} from "lucide-react";
 import FiltrosEgresos from "./FiltrosEgresos.tsx";
-import {gastos} from "../types/Gastos.ts";
 
 interface menuProps {
     menuAbierto : (boolean),
@@ -163,7 +162,6 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
                         <td className="px-4 md:px-6 py-4">
                             <div className="flex justify-center items-center gap-2 md:gap-3">
                                 {isEditId === gasto.id ? (
-                                    /* BOTÓN GUARDAR (CHECK) */
                                     <button
                                         className="text-emerald-500 hover:text-emerald-400 transition-all hover:scale-110 cursor-pointer p-1"
                                         onClick={guardarCambios}
@@ -173,7 +171,6 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
                                         </svg>
                                     </button>
                                 ) : (
-                                    /* BOTÓN EDITAR (LÁPIZ) */
                                     <button
                                         className="text-blue-500 hover:text-blue-400 transition-all hover:scale-110 cursor-pointer p-1"
                                         onClick={() => iniciarEdicion(gasto)}
@@ -183,19 +180,15 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
                                         </svg>
                                     </button>
                                 )}
-
-                                {/* BOTÓN ELIMINAR (SIEMPRE VISIBLE O CANCELAR SI ESTÁ EDITANDO) */}
                                 <button
                                     className="text-red-500 hover:text-red-400 transition-all hover:scale-110 cursor-pointer p-1"
                                     onClick={() => isEditId === gasto.id ? setIsEditId(null) : eliminarGasto(gasto.id)}
                                 >
                                     {isEditId === gasto.id ? (
-                                        /* Icono X para cancelar */
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                         </svg>
                                     ) : (
-                                        /* Icono Basura */
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
