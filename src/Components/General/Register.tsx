@@ -10,8 +10,6 @@ export default function Register() {
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-
-        // 1. Capturamos los datos del formulario de forma limpia
         const formData = new FormData(e.currentTarget);
         const data = {
             username: formData.get("username"),
@@ -22,7 +20,6 @@ export default function Register() {
         console.log("JSON enviado:", JSON.stringify(data));
 
         try {
-            // 2. Petición al endpoint de registro en FastAPI
             const response = await fetch("http://127.0.0.1:8000/register", {
                 method: "POST",
                 headers: {
@@ -34,14 +31,11 @@ export default function Register() {
             if (response.ok) {
                 const result = await response.json();
                 console.log("Éxito:", result.message);
-                // Si el registro y el envío de correo fueron exitosos
                 navigate("/CorreoConfirm");
             } else {
-                // Capturamos el error detallado de FastAPI (CORS o validación 422)
                 const errorDetail = await response.json();
                 console.error("Error del servidor:", errorDetail);
 
-                // Mostramos el error específico si existe, o uno genérico
                 const msg = errorDetail.detail ? JSON.stringify(errorDetail.detail) : "Error al crear la cuenta";
                 alert(`Error: ${msg}`);
             }
@@ -113,7 +107,7 @@ export default function Register() {
                                 className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest transition-all duration-300 transform active:scale-95 shadow-xl ${
                                     isLoading
                                         ? "bg-zinc-800 text-zinc-500 cursor-not-allowed opacity-50"
-                                        : "bg-white hover:bg-emerald-500 text-black hover:shadow-emerald-500/25"
+                                        : "bg-emerald-600 hover:bg-emerald-500 text-black hover:shadow-emerald-500/25"
                                 }`}
                             >
                                 {isLoading ? "Procesando..." : "Crear mi cuenta"}
