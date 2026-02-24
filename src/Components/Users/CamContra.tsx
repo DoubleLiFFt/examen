@@ -118,6 +118,7 @@ export default function CamContra() {
                                 variant="primary"
                                 type="submit"
                                 className="w-full py-5 hover:bg-emerald-500 font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-emerald-500/10 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
+                                onClick={cambiar_contraseña}
                             >
                                 Actualizar Credenciales
                                 <ArrowRight size={14} />
