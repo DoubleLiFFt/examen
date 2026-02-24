@@ -12,12 +12,12 @@ export default function TablaHistorial({ lista }: TablaHistorialProps) {
         <div className="w-full overflow-x-auto rounded-xl">
             <table className="w-full border-collapse text-center bg-[#1e1e1e] text-white">
                 <thead>
-                <tr className="text-gray-400 text-xs md:text-sm uppercase tracking-wider border-b border-[#2a2a2a]">
-                    <th className="p-4 font-semibold">FECHA</th>
-                    <th className="p-4 font-semibold">USUARIO</th>
-                    <th className="p-4 font-semibold hidden sm:table-cell">DIRECCION IP</th>
-                    <th className="p-4 font-semibold">ACCION</th>
-                </tr>
+                    <tr className="text-gray-400 text-xs md:text-sm uppercase tracking-wider border-b border-[#2a2a2a]">
+                        <th className="p-4 font-semibold">FECHA</th>
+                        <th className="p-4 font-semibold">USUARIO</th>
+                        <th className="p-4 font-semibold hidden sm:table-cell">DIRECCION IP</th>
+                        <th className="p-4 font-semibold">ACCION</th>
+                    </tr>
                 </thead>
                 <tbody className="divide-y divide-[#2a2a2a]">
                 {datosAMostrar.map((historial, index) => (
