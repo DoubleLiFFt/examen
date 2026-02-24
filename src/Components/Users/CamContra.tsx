@@ -9,7 +9,20 @@ export default function CamContra() {
         alert("Contraseña actualizada con éxito");
     };
 
+    async function cambiar_contraseña() {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/cambiarContraseña}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+            });
 
+            if (response.ok) {
+                console.log("Funciona el componente")
+            }
+        } catch (error) {
+            console.error("Error al cambiar contraseña", error);
+        }
+    }
 
 
 
