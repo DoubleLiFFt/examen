@@ -9,6 +9,13 @@ export default function CamContra() {
         alert("Contraseña actualizada con éxito");
     };
 
+
+
+
+
+
+    //----------------------------------------------------------------------------------------------------------------
+
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8 font-sans">
             <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.1)] rounded-[2.5rem] max-w-5xl w-full overflow-hidden min-h-150">
