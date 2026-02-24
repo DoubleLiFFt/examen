@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { usersAccounts, type RolUsers } from '../types/RolUsers';
 
 interface TablaUsuariosProps {
-    lista?: RolUsers[];
+    refreshSignal: number
 }
 
-export default function TablaUsuarios({ lista }: TablaUsuariosProps) {
+export default function TablaUsuarios({ refreshSignal }: TablaUsuariosProps) {
 
-    const datosAMostrar = lista || usersAccounts;
+    const [listaMostrar, setListaMostrar] = useState<any[]>([])
+    const [dataServidor, setDataServidor] = useState<any[]>([])
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/usersTablas")
+            .then(response => response.json())
+            .then(data => {
+                setDataServidor(data)
+                setListaMostrar(data)
+            })
+            .catch(error => console.error("Error cargando datos: ", error))
+    }, [refreshSignal]);
+
+    const datosAMostrar = dataServidor || usersAccounts;
 
     return (
         <div className="w-full overflow-x-auto rounded-xl">

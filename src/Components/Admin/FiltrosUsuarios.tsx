@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 interface PropsFiltro {
     alFiltrar: (rol: string) => void;
 }
 
 export default function FiltroUsuarios({ alFiltrar }: PropsFiltro) {
+
+
     const [rolSeleccionado, setRolSeleccionado] = useState("-1");
 
     const roles = ["Administrador", "Usuario"];
