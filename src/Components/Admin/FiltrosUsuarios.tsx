@@ -31,7 +31,7 @@ export default function FiltroUsuarios({ alFiltrar }: PropsFiltro) {
 
                 <button
                     type="button"
-                    className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white py-2 px-8 rounded-md transition-colors h-11"
+                    className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white py-2 px-8 rounded-md transition-colors h-11 hover:cursor-pointer"
                     onClick={() => alFiltrar(rolSeleccionado)}
                 >
                     Filtrar

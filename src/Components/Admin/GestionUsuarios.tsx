@@ -4,14 +4,12 @@ import TablaUsuarios from "./TablaUsuarios";
 
 
 export default function GestionUsuarios() {
-    const [rolSeleccionado, setRolSeleccionado] = useState<string>("Usuario");
+    const [rolSeleccionado, setRolSeleccionado] = useState<string>("-1");
     const [refresh, setRefresh] = useState(0);
 
     const ejecutarFiltro = (rol: string) => {
-        if (rol !== "-1") {
-            setRolSeleccionado(rol); 
-            setRefresh(prev => prev + 1); 
-        }
+        setRolSeleccionado(rol);
+        setRefresh(prev => prev + 1);
     };
 
     return (
