@@ -6,14 +6,22 @@ interface addProps {onAddSuccess: () => void}
 export default function AddDetails({onAddSuccess} : addProps) {
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const userId = sessionStorage.getItem("userId");
+
+        if (!userId) {
+            alert("Error: No se detectó una sesión activa.");
+            return;
+        }
         const form =e.currentTarget
         const formData = new FormData(e.currentTarget)
         const nuevoGasto = {
+            user_id: parseInt(userId),
             date : formData.get("date"),
             mount : parseFloat(formData.get("mount") as string),
             category : formData.get("category"),
             description : formData.get("description"),
-        };
+        }
+        console.log("Cuerpo del JSON a enviar:", JSON.stringify(nuevoGasto));
         try {
             const response = await fetch("http://127.0.0.1:8000/rellenarTabla", {
                 method : "POST",

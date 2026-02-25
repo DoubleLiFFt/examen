@@ -45,7 +45,7 @@ export default function Login() {
     }
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
-            <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.2)] rounded-[2rem] max-w-5xl w-full overflow-hidden min-h-[650px]">
+            <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.2)] rounded-4xl max-w-5xl w-full overflow-hidden min-h-162.5">
                 <div className="flex-1 p-8 md:p-16 flex flex-col justify-center">
                     <header className="mb-10">
                         <h1 className="text-4xl font-black text-white tracking-tighter mb-2 italic">LOGIN</h1>
@@ -89,7 +89,7 @@ export default function Login() {
                         </div>
 
                         <div className="text-center pt-4">
-                            <Link to="/CodConfirm" className="text-[10px] text-zinc-500 hover:text-emerald-400 transition-colors font-black uppercase tracking-[0.1em]">
+                            <Link to="/CodConfirm" className="text-[10px] text-zinc-500 hover:text-emerald-400 transition-colors font-black uppercase tracking-widest">
                                 ¿Problemas para iniciar sesión? <span className="text-emerald-500 underline underline-offset-4 decoration-2">Recuperar cuenta</span>
                             </Link>
                         </div>
@@ -102,7 +102,7 @@ export default function Login() {
                         alt="Img"
                         className="absolute inset-0 w-full h-full object-cover grayscale opacity-50 hover:scale-105 transition-transform duration-1000"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#141414]/60"></div>
+                    <div className="absolute inset-0 bg-linear-to-l from-transparent to-[#141414]/60"></div>
                 </div>
             </div>
         </section>
