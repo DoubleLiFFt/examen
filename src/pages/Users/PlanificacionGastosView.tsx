@@ -20,7 +20,7 @@ export default function PlanificacionGastosView() {
 
     const cargarConfiguracionPresupuesto = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual");
+            const response = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual/${userId}");
             if (response.ok) {
                 const data = await response.json();
                 setPresupuesto(data.limit_mount);
