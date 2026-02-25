@@ -15,14 +15,13 @@ interface Gasto {
 
 export default function PlanificacionGastosView() {
     const [dataServidor, setDataServidor] = useState<Gasto[]>([]);
-    const [presupuesto, setPresupuesto] = useState<number>(0);
-    const [isLoading, setIsLoading] = useState(true);
-    const userId = sessionStorage.getItem("userId");
+    const [presupuesto, setPresupuesto] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState(true)
+    const userId = sessionStorage.getItem("userId")
 
     const cargarDatos = async () => {
         if (!userId) return;
         try {
-            // 1. Cargar Presupuesto filtrado por usuario (si tu backend lo permite)
             const resPresupuesto = await fetch(`http://127.0.0.1:8000/obtenerPresupuestoActual`);
             if (resPresupuesto.ok) {
                 const data = await resPresupuesto.json();
@@ -49,7 +48,7 @@ export default function PlanificacionGastosView() {
                     limit_mount: valor,
                     month_year: "2026-02",
                     category: "TOTAL",
-                    user_id: parseInt(userId || "0") // Enviamos el dueño del presupuesto
+                    user_id: parseInt(userId || "0")
                 })
             });
         } catch (error) {

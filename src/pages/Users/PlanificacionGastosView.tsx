@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Target, AlertTriangle, CheckCircle2, TrendingUp } from "lucide-react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, ChartOptions } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,20 +15,37 @@ interface Gasto {
 
 export default function PlanificacionGastosView() {
     const [dataServidor, setDataServidor] = useState<Gasto[]>([]);
-    const [presupuesto, setPresupuesto] = useState<number>(0); // Iniciamos en 0
+    const [presupuesto, setPresupuesto] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(true);
 
-    const cargarConfiguracionPresupuesto = async () => {
+    const userId = sessionStorage.getItem("userId");
+
+    const cargarDatos = async () => {
+        if (!userId) {
+            console.error("No hay ID de usuario");
+            setIsLoading(false);
+            return;
+        }
+
         try {
-            const response = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual");
-            if (response.ok) {
-                const data = await response.json();
+            // 1. Cargamos el presupuesto actual
+            const resPresupuesto = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual");
+            if (resPresupuesto.ok) {
+                const data = await resPresupuesto.json();
                 setPresupuesto(data.limit_mount);
             }
+            const resGastos = await fetch(`http://127.0.0.1:8000/tablas/${userId}`);
+            if (resGastos.ok) {
+                const gastos = await resGastos.json();
+                setDataServidor(gastos);
+            }
         } catch (error) {
-            console.error("Error cargando presupuesto:", error);
+            console.error("Error en la conexión:", error);
+        } finally {
+            setIsLoading(false);
         }
     };
+
     const guardarPresupuestoDB = async (valor: number) => {
         try {
             await fetch("http://127.0.0.1:8000/configurarPresupuesto", {
@@ -37,43 +54,18 @@ export default function PlanificacionGastosView() {
                 body: JSON.stringify({
                     limit_mount: valor,
                     month_year: "2026-02",
-                    category: "TOTAL"
+                    category: "TOTAL",
+                    user_id: parseInt(userId || "0")
                 })
             });
         } catch (error) {
-            console.error(error);
-        }
-    };
-    useEffect(() => {
-        Promise.all([
-            fetch("http://127.0.0.1:8000/tablas").then(res => res.json()),
-            cargarConfiguracionPresupuesto()
-        ]).then(([gastos]) => {
-            setDataServidor(gastos);
-            setIsLoading(false);
-        }).catch(() => setIsLoading(false));
-    }, []);
-
-    const fetchPresupuestoActual = async () => {
-        try {
-            const response = await fetch("http://127.0.0.1:8000/alertasPresupuesto");
-            if (response.ok) {
-            }
-        } catch (error) {
-            console.error(error);
+            console.error("Error al guardar presupuesto:", error);
         }
     };
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/tablas")
-            .then(response => response.json())
-            .then((data: Gasto[]) => {
-                setDataServidor(data);
-                setIsLoading(false);
-            })
-            .catch(() => setIsLoading(false));
-        fetchPresupuestoActual();
-    }, []);
+        cargarDatos();
+    }, [userId]);
 
     const gastoTotal = dataServidor.reduce((acc, curr) => acc + curr.mount, 0);
     const porcentaje = presupuesto > 0 ? (gastoTotal / presupuesto) * 100 : 0;
@@ -110,12 +102,13 @@ export default function PlanificacionGastosView() {
             <div className="max-w-6xl mx-auto flex flex-col gap-8">
                 <div className="flex flex-col gap-1">
                     <h1 className="text-4xl font-black tracking-tighter italic uppercase">Planificación</h1>
-                    <p className="text-zinc-500 text-sm font-medium">Análisis de presupuesto vs ejecución real de base de datos.</p>
+                    <p className="text-zinc-500 text-sm font-medium">Análisis de presupuesto personal.</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Gráfica */}
                     <div className="lg:col-span-5 bg-[#1e1e1e] border border-[#2a2a2a] rounded-[2.5rem] p-8 flex flex-col items-center justify-center relative min-h-100">
-                        <div className="w-full h-full">
+                        <div className="w-full h-full flex items-center justify-center">
                             <Doughnut data={chartData} options={{ plugins: { legend: { display: false } }, maintainAspectRatio: false }} />
                         </div>
                         <div className="absolute flex flex-col items-center justify-center pointer-events-none">
@@ -125,7 +118,6 @@ export default function PlanificacionGastosView() {
                             </span>
                         </div>
                     </div>
-
                     <div className="lg:col-span-7 flex flex-col gap-6">
                         <div className="bg-[#1e1e1e] border border-[#2a2a2a] p-8 rounded-[2.5rem]">
                             <div className="flex items-center gap-4 mb-6">
@@ -134,7 +126,7 @@ export default function PlanificacionGastosView() {
                                 </div>
                                 <div>
                                     <h2 className="text-xl font-bold">Límite Mensual</h2>
-                                    <p className="text-zinc-500 text-xs">Ajusta tu presupuesto para recibir alertas en tiempo real.</p>
+                                    <p className="text-zinc-500 text-xs">Ajusta tu meta de gastos para este mes.</p>
                                 </div>
                             </div>
 
@@ -165,15 +157,14 @@ export default function PlanificacionGastosView() {
                                 </p>
                             </div>
                         </div>
-
                         <div className={`p-6 rounded-3xl border ${status.bg} ${status.border} flex items-start gap-4 transition-all duration-500`}>
                             <div className={status.color}>{status.icon}</div>
                             <div className="flex flex-col gap-1">
                                 <h4 className={`font-black uppercase text-xs tracking-wider ${status.color}`}>{status.label}</h4>
                                 <p className="text-sm text-zinc-300 leading-relaxed">
                                     {porcentaje >= 100
-                                        ? `Exceso detectado de S/. ${Math.abs(margen)}. El sistema de alertas ha sido activado en la barra de navegación.`
-                                        : `Consumo dentro de los parámetros. Dispones del ${(100 - porcentaje).toFixed(1)}% de tu capital antes de alcanzar el límite.`}
+                                        ? `Has superado tu presupuesto. Evita gastos innecesarios.`
+                                        : `Vas bien. Tienes S/. ${margen.toLocaleString()} disponibles.`}
                                 </p>
                             </div>
                         </div>
