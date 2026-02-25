@@ -30,11 +30,14 @@ export default function PlanificacionGastosView() {
         }
     };
     const guardarPresupuestoDB = async (valor: number) => {
+        const userId = sessionStorage.getItem("userId");
+        if (!userId) return;
         try {
             await fetch("http://127.0.0.1:8000/configurarPresupuesto", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    user_id: parseInt(userId),
                     limit_mount: valor,
                     month_year: "2026-02",
                     category: "TOTAL"
