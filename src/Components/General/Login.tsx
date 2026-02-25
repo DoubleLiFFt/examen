@@ -27,6 +27,21 @@ export default function Login() {
             alert("Usuario o contraseña incorrectas");
         }
     };
+    
+    async function login() {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/login}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (response.ok) {
+                console.log("Funciona el componente")
+            }
+        } catch (error) {
+            console.error("Error al loggearse", error);
+        }
+    }
 
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
@@ -64,7 +79,12 @@ export default function Login() {
                         </div>
 
                         <div className="pt-4">
-                            <Button variant="primary" type="submit" className="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-black uppercase tracking-widest shadow-lg shadow-emerald-500/20 transition-all active:scale-95">
+                            <Button variant="primary" 
+                                    type="submit" 
+                                    className="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-black font-black uppercase tracking-widest shadow-lg shadow-emerald-500/20 transition-all active:scale-95"
+                                    onClick={login}
+                            >
+
                                 Entrar
                             </Button>
                         </div>
