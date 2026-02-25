@@ -17,7 +17,7 @@ import PlanificacionGastosView from "./pages/Users/PlanificacionGastosView.tsx"
 
 function App() {
   return (
-    <Router>
+      <>
         <Navbar />
         <Routes>
             <Route path="/" element={<GeneralView />} />
@@ -34,7 +34,7 @@ function App() {
             <Route path="/HistorialAccesosView" element={<HistorialAccesosView />}/>
             <Route path="/PlanificacionGastosView" element={<PlanificacionGastosView />}/>
         </Routes>
-    </Router>
+      </>
   )
 }
 
