@@ -6,13 +6,11 @@ import NotificationBell from './NotificationBell';
 export default function Navbar() {
     const navigate = useNavigate();
 
-    // Estados para controlar la UI según la sesión
     const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("username"))
     const [useRole, setUseRole] = useState(sessionStorage.getItem("userrole"))
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        // Esta función se ejecuta cada vez que hay un cambio en el storage o el evento manual
         const handleStorageChange = () => {
             setIsLoggedIn(sessionStorage.getItem("username"))
             setUseRole(sessionStorage.getItem("userrole"))
@@ -35,9 +33,7 @@ export default function Navbar() {
     const toggle = () => {
         setIsOpen(!isOpen);
     }
-
-    // Normalizamos el rol a mayúsculas para las comparaciones de abajo
-    const currentRole = useRole?.toUpperCase() || "";
+    const currentRole = useRole || "";
 
     return (
         <nav className="flex flex-row justify-between h-24 items-center bg-[#1e1e1e] px-8 md:px-28 border-b border-[#2a2a2a] sticky top-0 z-60 shadow-2xl">
@@ -99,14 +95,14 @@ export default function Navbar() {
                                 />
                                 <NavItem label="MI PERFIL" onClick={() => { navigate("/Perfil"); toggle(); }} />
 
-                                {currentRole === "ADMIN" && (
+                                {currentRole === "admin" && (
                                     <div className="mt-6 pt-6 border-t border-[#3a3a3a] w-full flex flex-col">
                                         <p className="text-[10px] font-black text-emerald-500/60 tracking-[0.3em] mb-4 ml-6 uppercase">Seguridad Avanzada</p>
                                         <NavItem label="FILTRO DE ACCESOS" onClick={() => { navigate("/HistorialAccesosView"); toggle(); }} />
                                     </div>
                                 )}
 
-                                {currentRole === "USER" && (
+                                {currentRole === "user" && (
                                     <div className="mt-6 pt-6 border-t border-[#3a3a3a] w-full flex flex-col">
                                         <p className="text-[10px] font-black text-emerald-500/60 tracking-[0.3em] mb-4 ml-6 uppercase">Planificación</p>
                                         <NavItem label="MIS GASTOS" onClick={() => { navigate("/PlanificacionGastosView"); toggle(); }} />
