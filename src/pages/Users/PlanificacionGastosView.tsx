@@ -15,7 +15,7 @@ interface Gasto {
 
 export default function PlanificacionGastosView() {
     const [dataServidor, setDataServidor] = useState<Gasto[]>([]);
-    const [presupuesto, setPresupuesto] = useState<number>(0); // Iniciamos en 0
+    const [presupuesto, setPresupuesto] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(true);
 
     const cargarConfiguracionPresupuesto = async () => {
