@@ -19,7 +19,7 @@ export default function TablaUsuarios({ refreshSignal, rolFiltro }: TablaUsuario
 
     useEffect(() => {
  
-        fetch(http://127.0.0.1:8000/usersTablas)
+        fetch("http://127.0.0.1:8000/usersTablas")
             .then(response => response.json())
             .then(data => setDataServidor(data))
             .catch(error => console.error("Error cargando datos:", error));
