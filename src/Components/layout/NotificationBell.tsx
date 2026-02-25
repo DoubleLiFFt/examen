@@ -4,9 +4,11 @@ import { FaBell } from 'react-icons/fa';
 const NotificationBell = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [notifications, setNotifications] = useState<string[]>([]);
+    const userId = sessionStorage.getItem("userId");
     const fetchAlertas = async () => {
+        if (!userId) return;
         try {
-            const response = await fetch("http://127.0.0.1:8000/alertasPresupuesto");
+            const response = await fetch(`http://127.0.0.1:8000/alertasPresupuesto/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setNotifications(data);
