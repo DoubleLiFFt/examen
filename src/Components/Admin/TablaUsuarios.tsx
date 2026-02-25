@@ -1,27 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import { usersAccounts, type RolUsers } from '../types/RolUsers';
 
 interface TablaUsuariosProps {
-    refreshSignal: number
+    refreshSignal: number;
+    rolFiltro: string;
 }
 
-export default function TablaUsuarios({ refreshSignal }: TablaUsuariosProps) {
-
-    const [listaMostrar, setListaMostrar] = useState<any[]>([])
-    const [dataServidor, setDataServidor] = useState<any[]>([])
+export default function TablaUsuarios({ refreshSignal, rolFiltro }: TablaUsuariosProps) {
+    const [dataServidor, setDataServidor] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/usersTablas")
+ 
+        fetch(`http://127.0.0.1:8000/usuariosRol/${rolFiltro}`)
             .then(response => response.json())
-            .then(data => {
-                setDataServidor(data)
-                setListaMostrar(data)
-            })
-            .catch(error => console.error("Error cargando datos: ", error))
-    }, [refreshSignal]);
+            .then(data => setDataServidor(data))
+            .catch(error => console.error("Error cargando datos:", error));
+    }, [refreshSignal, rolFiltro]); 
 
-    const datosAMostrar = dataServidor || usersAccounts;
-
+    
     return (
         <div className="w-full overflow-x-auto rounded-xl">
             <table className="w-full border-collapse text-center bg-[#1e1e1e] text-white">
@@ -33,7 +28,7 @@ export default function TablaUsuarios({ refreshSignal }: TablaUsuariosProps) {
                 </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">
-                {datosAMostrar.map((usuario, index) => (
+                {dataServidor.map((usuario, index) => (
                     <tr key={index} className="hover:bg-gray-800 transition-colors">
                         <td className="p-4 text-sm">
                             <span className="font-medium block">{usuario.username}</span>
@@ -43,12 +38,12 @@ export default function TablaUsuarios({ refreshSignal }: TablaUsuariosProps) {
                             {usuario.email}
                         </td>
                         <td className="p-4 text-sm">
-                                <span className={`px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wide border ${usuario.rol === 'Administrador' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-800/30'
-                                    : usuario.rol === 'Auditor'
+                                <span className={`px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wide border 
+                                        ${usuario.userrole === 'Administrador' 
                                         ? 'bg-yellow-900/30 text-yellow-400 border-yellow-800/30'
                                         : 'bg-blue-900/30 text-blue-400 border-blue-800/30'
                                 }`}>
-                                    {usuario.rol}
+                                    {usuario.userrole}
                                 </span>
                         </td>
                     </tr>
