@@ -1,20 +1,25 @@
 import Button from "../example/Button.tsx";
 import { Link, useNavigate } from 'react-router-dom';
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import NotificationBell from './NotificationBell';
 
 export default function Navbar() {
     const navigate = useNavigate();
 
+    // Estados para controlar la UI según la sesión
     const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("username"))
     const [useRole, setUseRole] = useState(sessionStorage.getItem("userrole"))
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
+        // Esta función se ejecuta cada vez que hay un cambio en el storage o el evento manual
         const handleStorageChange = () => {
             setIsLoggedIn(sessionStorage.getItem("username"))
             setUseRole(sessionStorage.getItem("userrole"))
         }
+
         window.addEventListener("storage", handleStorageChange)
+
         return () => {
             window.removeEventListener("storage", handleStorageChange)
         }
@@ -27,10 +32,12 @@ export default function Navbar() {
         navigate("/Login")
     };
 
-    const [isOpen, setIsOpen] = React.useState(false);
     const toggle = () => {
         setIsOpen(!isOpen);
     }
+
+    // Normalizamos el rol a mayúsculas para las comparaciones de abajo
+    const currentRole = useRole?.toUpperCase() || "";
 
     return (
         <nav className="flex flex-row justify-between h-24 items-center bg-[#1e1e1e] px-8 md:px-28 border-b border-[#2a2a2a] sticky top-0 z-60 shadow-2xl">
@@ -71,6 +78,7 @@ export default function Navbar() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
+
                         <aside className={`fixed w-80 md:w-96 top-0 right-0 h-full bg-[#242424] z-70 p-8 flex flex-col gap-10 text-white shadow-[-15px_0_40px_rgba(0,0,0,0.7)] border-l border-[#333] transition-transform duration-500 ease-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
                             <div className="flex justify-between items-center border-b border-[#3a3a3a] pb-6">
                                 <span className="text-xs font-bold tracking-widest text-emerald-500 uppercase">Navegación</span>
@@ -85,19 +93,20 @@ export default function Navbar() {
                                 <NavItem
                                     label="PANEL PRINCIPAL"
                                     onClick={() => {
-                                        navigate(useRole === "ADMIN" ? "/AdminView" : "/UserView");
+                                        navigate(currentRole === "ADMIN" ? "/AdminView" : "/UserView");
                                         toggle();
                                     }}
                                 />
                                 <NavItem label="MI PERFIL" onClick={() => { navigate("/Perfil"); toggle(); }} />
-                                {useRole === "ADMIN" && (
+
+                                {currentRole === "ADMIN" && (
                                     <div className="mt-6 pt-6 border-t border-[#3a3a3a] w-full flex flex-col">
                                         <p className="text-[10px] font-black text-emerald-500/60 tracking-[0.3em] mb-4 ml-6 uppercase">Seguridad Avanzada</p>
                                         <NavItem label="FILTRO DE ACCESOS" onClick={() => { navigate("/HistorialAccesosView"); toggle(); }} />
                                     </div>
                                 )}
 
-                                {useRole === "USER" && (
+                                {currentRole === "USER" && (
                                     <div className="mt-6 pt-6 border-t border-[#3a3a3a] w-full flex flex-col">
                                         <p className="text-[10px] font-black text-emerald-500/60 tracking-[0.3em] mb-4 ml-6 uppercase">Planificación</p>
                                         <NavItem label="MIS GASTOS" onClick={() => { navigate("/PlanificacionGastosView"); toggle(); }} />

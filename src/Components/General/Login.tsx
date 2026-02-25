@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Login() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setIsLoading(true)
@@ -24,13 +25,17 @@ export default function Login() {
             const result = await response.json()
 
             if (response.ok) {
+                // Guardamos los datos asegurando que las llaves coincidan con la Navbar
                 sessionStorage.setItem("email", result.user.email)
                 sessionStorage.setItem("username", result.user.username)
+                sessionStorage.setItem("userrole", result.user.userrole)
 
+                // DISPARAR EVENTO: Esto avisa a la Navbar que debe actualizarse inmediatamente
                 window.dispatchEvent(new Event("storage"));
 
-                const role = result.user.userrole || "user"
-                if (role === "admin" || role === "ADMIN") {
+                const role = result.user.userrole || "USER"
+                // Normalizamos a mayúsculas para evitar errores de comparación
+                if (role.toUpperCase() === "ADMIN") {
                     navigate("/AdminView")
                 } else {
                     navigate("/UserView")
@@ -45,6 +50,7 @@ export default function Login() {
             setIsLoading(false)
         }
     }
+
     return (
         <section className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4 md:p-8">
             <div className="flex bg-[#141414] border border-[#222] shadow-[0_0_50px_-12px_rgba(16,185,129,0.2)] rounded-4xl max-w-5xl w-full overflow-hidden min-h-162.5">
