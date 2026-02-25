@@ -5,7 +5,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Modo Bundler para Vite */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -13,7 +12,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Reglas de tipado */
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
