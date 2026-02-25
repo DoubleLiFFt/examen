@@ -9,20 +9,36 @@ export default function CamContra() {
         alert("Contraseña actualizada con éxito");
     };
 
-    async function cambiar_contraseña() {
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/cambiarContraseña}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-            });
+    async function cambiar_contraseña(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
-            if (response.ok) {
-                console.log("Funciona el componente")
-            }
-        } catch (error) {
-            console.error("Error al cambiar contraseña", error);
+    const formData = new FormData(e.currentTarget);
+
+    const data = {
+        email: formData.get("email"),
+        nueva: formData.get("newPassword"),
+        confirmar: formData.get("confirmPassword"),
+    };
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/cambiarContraseña", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(result.detail);
+            return;
         }
+
+        alert("Contraseña actualizada correctamente");
+    } catch (error) {
+        console.error("Error:", error);
     }
+}
 
 
 
@@ -61,7 +77,7 @@ export default function CamContra() {
                         <p className="text-zinc-500 text-sm font-medium leading-relaxed">Protege tu cuenta actualizando tus credenciales de acceso periódicamente.</p>
                     </header>
 
-                    <form onSubmit={submit} className="space-y-6">
+                    <form onSubmit={cambiar_contraseña} className="space-y-6">
                         <div className="space-y-5">
                             <div className="group">
                                 <label className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] ml-1 mb-2 block group-focus-within:text-emerald-500 transition-colors">
@@ -118,7 +134,7 @@ export default function CamContra() {
                                 variant="primary"
                                 type="submit"
                                 className="w-full py-5 hover:bg-emerald-500 font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-emerald-500/10 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
-                                onClick={cambiar_contraseña}
+                                
                             >
                                 Actualizar Credenciales
                                 <ArrowRight size={14} />
