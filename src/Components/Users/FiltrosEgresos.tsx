@@ -24,7 +24,7 @@ export default function FiltrosEgresos({ onFiltrar }: FiltrosEgresosProps) {
                         value={cat}
                         onChange={(e) => setCat(e.target.value)}
                     >
-                        <option>Categoría</option>
+                        <option value="Todas">Todas las categorías</option>
                         <option>Comida</option>
                         <option>Transporte</option>
                         <option>Vivienda</option>

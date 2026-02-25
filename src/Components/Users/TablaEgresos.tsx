@@ -1,12 +1,22 @@
-import React from 'react';
-import { listaGastosDB, type GastosUsers } from '../types/GastosUsers';
+import React, { useEffect, useState } from 'react';
 
 interface TablaEgresosProps {
-    lista?: GastosUsers[];
+    refreshSignal: number;
+    categoriaFiltro: string;
 }
 
-export default function TablaEgresos({ lista }: TablaEgresosProps) {
-    const datosAMostrar = lista || listaGastosDB;
+export default function TablaEgresos({ refreshSignal, categoriaFiltro }: TablaEgresosProps) {
+    const [dataServidor, setDataServidor] = useState<any[]>([]);
+    
+    useEffect(() => {
+    fetch(`http://127.0.0.1:8000/gastosPorCategoria/${categoriaFiltro}`)
+        .then(response => response.json())
+        .then(data => {
+            setDataServidor(data);
+        })
+        .catch(error => console.error("Error cargando egresos: ", error));
+    }, [refreshSignal, categoriaFiltro]);
+    
 
     return (
         <div className="w-full overflow-x-auto rounded-xl">
@@ -20,7 +30,7 @@ export default function TablaEgresos({ lista }: TablaEgresosProps) {
                 </tr>
                 </thead>
                 <tbody className="divide-y divide-[#2a2a2a]">
-                {datosAMostrar.map((egreso, index) => (
+                {dataServidor.map((egreso, index) => (
                     <tr key={index} className="hover:bg-[#252525] transition-colors group">
                         <td className="p-4 text-sm text-gray-500 hidden md:table-cell">
                             {egreso.date}

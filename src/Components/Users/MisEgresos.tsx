@@ -1,27 +1,17 @@
 import { useState } from 'react';
 import FiltrosEgresos from './FiltrosEgresos';
 import TablaEgresos from './TablaEgresos';
-import { listaGastosDB, type GastosUsers } from '../types/GastosUsers';
+
 
 export default function MisEgresos() {
-    const [egresosFiltrados, setEgresosFiltrados] = useState<GastosUsers[]>(listaGastosDB);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>("Todas");
+    const [refresh, setRefresh] = useState<number>(0);
 
-    const filtrarEgresos = (cat: string, inicio: string, fin: string, min: string, max: string) => {
-        let resultado = [...listaGastosDB];
-
-        if (cat !== "Categoría" && cat !== "Todas") {
-            resultado = resultado.filter(e => e.category === cat);
-        }
-
-        if (inicio) resultado = resultado.filter(e => e.date >= inicio);
-        if (fin) resultado = resultado.filter(e => e.date <= fin);
-
-        if (min) resultado = resultado.filter(e => e.mount >= parseFloat(min));
-        if (max) resultado = resultado.filter(e => e.mount <= parseFloat(max));
-
-        setEgresosFiltrados(resultado);
+    const filtrarEgresos = (cat: string) => {
+    setCategoriaSeleccionada(cat); 
+    setRefresh(prev => prev + 1);
     };
-
+     
     return (
         <div className="max-w-7xl mx-auto border border-[#2a2a2a] bg-[#1e1e1e] p-4 md:p-10 rounded-2xl md:rounded-3xl mb-12 mt-8 md:mt-12 shadow-xl">
             <div className="mb-8 border-b border-[#2a2a2a] pb-6">
@@ -32,7 +22,7 @@ export default function MisEgresos() {
                 <FiltrosEgresos onFiltrar={filtrarEgresos} />
             </div>
             <div className="bg-[#1a1a1a] rounded-xl border border-[#2a2a2a] overflow-hidden">
-                <TablaEgresos lista={egresosFiltrados} />
+                <TablaEgresos refreshSignal={refresh} categoriaFiltro={categoriaSeleccionada} />
             </div>
         </div>
     );
