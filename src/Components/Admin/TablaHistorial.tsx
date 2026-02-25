@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
-import { usersAccounts } from "../types/HistoUsers";
-import type { HistoUsers } from "../types/HistoUsers";
 
 interface TablaHistorialProps {
-    refreshSignal : number
+    refreshSignal : number;
+    accionFiltro: string;
+    fechaInicio: string;  
+    fechaFin: string;     
 }
 
-export default function TablaHistorial({ refreshSignal }: TablaHistorialProps) {
-        const [listaMostrar, setListaMostrar] = useState<any[]>([])
+export default function TablaHistorial({ refreshSignal, accionFiltro, fechaInicio, fechaFin }: TablaHistorialProps) {
+
         const [dataServidor, setDataServidor] = useState<any[]>([])
     
         useEffect(() => {
-            fetch("http://127.0.0.1:8000/usersTablas")
-                .then(response => response.json())
-                .then(data => {
-                    setDataServidor(data)
-                    setListaMostrar(data)
-                })
-                .catch(error => console.error("Error cargando datos: ", error))
-        }, [refreshSignal]);
-    
-    const datosAMostrar = dataServidor || usersAccounts;
-    
+        const url = `http://127.0.0.1:8000/historialFiltrado?accion=${accionFiltro}&inicio=${fechaInicio}&fin=${fechaFin}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setDataServidor(data);
+            })
+            .catch(error => console.error("Error cargando historial: ", error));
+    }, [refreshSignal, accionFiltro, fechaInicio, fechaFin]);
 
     return (
         <div className="w-full overflow-x-auto rounded-xl">
@@ -35,19 +34,19 @@ export default function TablaHistorial({ refreshSignal }: TablaHistorialProps) {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-[#2a2a2a]">
-                {datosAMostrar.map((historial, index) => (
+                {dataServidor.map((historial, index) => (
                     <tr key={index} className="hover:bg-[#252525] transition-colors">
                         <td className="p-4 text-xs md:text-sm text-gray-400 whitespace-nowrap">
-                            {historial.createdTime}
+                            {historial.createdtime}
                         </td>
                         <td className="p-4 text-sm font-medium">
                             {historial.username}
                             <span className="block text-[10px] text-gray-600 sm:hidden mt-1">
-                  {historial.ip}
+                  {historial.ipadress}
                 </span>
                         </td>
                         <td className="p-4 text-sm text-gray-500 hidden sm:table-cell">
-                            {historial.ip}
+                            {historial.ipadress}
                         </td>
                         <td className="p-4 text-sm">
                 <span className={`font-bold px-2 py-1 rounded-md text-[10px] md:text-xs uppercase border ${
