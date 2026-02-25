@@ -1,17 +1,30 @@
 import Button from "../example/Button.tsx";
 import { Link, useNavigate } from 'react-router-dom';
-import React from "react";
+import React, {useEffect, useState} from "react";
 import NotificationBell from './NotificationBell';
 
 export default function Navbar() {
     const navigate = useNavigate();
 
-    const isLoggedIn = sessionStorage.getItem("username");
-    const useRole = sessionStorage.getItem("userrole");
+    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem("username"))
+    const [useRole, setUseRole] = useState(sessionStorage.getItem("userrole"))
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setIsLoggedIn(sessionStorage.getItem("username"))
+            setUseRole(sessionStorage.getItem("userrole"))
+        }
+        window.addEventListener("storage", handleStorageChange)
+        return () => {
+            window.removeEventListener("storage", handleStorageChange)
+        }
+    }, [])
 
     const handleLogout = () => {
-        sessionStorage.clear();
-        navigate("/Login");
+        sessionStorage.clear()
+        setIsLoggedIn(null)
+        setUseRole(null)
+        navigate("/Login")
     };
 
     const [isOpen, setIsOpen] = React.useState(false);

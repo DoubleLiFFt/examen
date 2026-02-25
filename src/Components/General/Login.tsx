@@ -27,6 +27,8 @@ export default function Login() {
                 sessionStorage.setItem("email", result.user.email)
                 sessionStorage.setItem("username", result.user.username)
 
+                window.dispatchEvent(new Event("storage"));
+
                 const role = result.user.userrole || "user"
                 if (role === "admin" || role === "ADMIN") {
                     navigate("/AdminView")
