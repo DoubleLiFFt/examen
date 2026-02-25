@@ -9,19 +9,19 @@ export default function CamContra() {
         alert("Contraseña actualizada con éxito");
     };
 
-    async function cambiar_contraseña(e: React.FormEvent<HTMLFormElement>) {
+    async function cambiar_contrasena(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
     const data = {
-        email: formData.get("email"),
-        nueva: formData.get("newPassword"),
-        confirmar: formData.get("confirmPassword"),
+    email: String(formData.get("email") || ""),
+    nueva: String(formData.get("newPassword") || ""),
+    confirmar: String(formData.get("confirmPassword") || ""),
     };
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/cambiarContraseña", {
+        const response = await fetch("http://127.0.0.1:8000/cambiarContrasena", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -77,7 +77,7 @@ export default function CamContra() {
                         <p className="text-zinc-500 text-sm font-medium leading-relaxed">Protege tu cuenta actualizando tus credenciales de acceso periódicamente.</p>
                     </header>
 
-                    <form onSubmit={cambiar_contraseña} className="space-y-6">
+                    <form onSubmit={cambiar_contrasena} className="space-y-6">
                         <div className="space-y-5">
                             <div className="group">
                                 <label className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] ml-1 mb-2 block group-focus-within:text-emerald-500 transition-colors">
