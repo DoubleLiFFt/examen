@@ -6,7 +6,7 @@ interface PropsFiltro {
 
 export default function FiltroHistorial({ onFiltrar }: PropsFiltro) {
 
-    const [accion, setAccion] = useState("Todos");
+    const [accion, setAccion] = useState("Todas");
     const [fechaInicio, setFechaInicio] = useState("");
     const [fechaFin, setFechaFin] = useState("");
 
@@ -20,7 +20,7 @@ export default function FiltroHistorial({ onFiltrar }: PropsFiltro) {
                     value={accion}
                     onChange={(e) => setAccion(e.target.value)}
                 >
-                    <option value="Todos">Todos los estados</option>
+                    <option value="Todas">Todos los estados</option>
                     <option value="Login">Login</option>
                     <option value="Logout">Logout</option>
                 </select>

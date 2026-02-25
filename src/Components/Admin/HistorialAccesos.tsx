@@ -2,37 +2,32 @@ import { useState } from "react";
 import FiltroHistorial from "./FiltrosHistorial";
 import TablaHistorial from "./TablaHistorial";
 
-import { usersAccounts } from "../../Components/types/HistoUsers";
-import type { HistoUsers } from "../../Components/types/HistoUsers";
 
-export default function HistorialAccesos() {
+export default function HistorialAcceso() {
 
-    const [datosFiltrados, setDatosFiltrados] = useState<HistoUsers[]>(usersAccounts);
+    const [accion, setAccion] = useState<string>("Todas");
+    const [inicio, setInicio] = useState<string>("");
+    const [fin, setFin] = useState<string>("");
+    const [refresh, setRefresh] = useState<number>(0);
 
-    const ejecutarFiltro = (accion: string, inicio: string, fin: string) => {
-        let resultado = [...usersAccounts];
-
-        if (accion !== "Todos") {
-            resultado = resultado.filter((h) => h.accion === accion);
-        }
-
-        if (inicio && fin) {
-            resultado = resultado.filter((h) => h.createdTime >= inicio && h.createdTime <= fin);
-        } else if (inicio) {
-            resultado = resultado.filter((h) => h.createdTime >= inicio);
-        } else if (fin) {
-            resultado = resultado.filter((h) => h.createdTime <= fin);
-        }
-
-        setDatosFiltrados(resultado);
+    const ejecutarFiltro = (acc: string, ini: string, f: string) => {
+        setAccion(acc);
+        setInicio(ini);
+        setFin(f);
+        setRefresh(prev => prev + 1); 
     };
 
     return (
-        <div className="max-w-7xl mx-auto border border-gray-800 bg-[#1e1e1e] p-4 md:p-8 rounded-2xl md:rounded-3xl mb-12 mx-4 md:mx-auto mt-8 md:mt-12 shadow-xl">
-            <FiltroHistorial onFiltrar={ejecutarFiltro} />
-            <div className="mt-4 overflow-hidden">
-                <TablaHistorial lista={datosFiltrados} />
-            </div>
+    <div className="max-w-7xl mx-auto border ...">
+        <FiltroHistorial onFiltrar={ejecutarFiltro} />
+        <div className="mt-4 overflow-hidden">
+            <TablaHistorial 
+                refreshSignal={refresh}
+                accionFiltro={accion}
+                fechaInicio={inicio}
+                fechaFin={fin}
+            />
         </div>
+    </div>
     );
 }
