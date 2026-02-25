@@ -8,9 +8,18 @@ interface TablaUsuariosProps {
 export default function TablaUsuarios({ refreshSignal, rolFiltro }: TablaUsuariosProps) {
     const [dataServidor, setDataServidor] = useState<any[]>([]);
 
+    const usuariosFiltrados = dataServidor.filter((usuario) => {
+        if (rolFiltro === "-1") return true;
+        const roleLower = usuario.userrole?.toLowerCase();
+        if (rolFiltro === "Administrador") return roleLower === "admin" || roleLower === "administrador";
+        if (rolFiltro === "Usuario") return roleLower === "user" || roleLower === "usuario";
+
+        return false;
+    });
+
     useEffect(() => {
  
-        fetch(`http://127.0.0.1:8000/usuariosRol/${rolFiltro}`)
+        fetch(http://127.0.0.1:8000/usersTablas)
             .then(response => response.json())
             .then(data => setDataServidor(data))
             .catch(error => console.error("Error cargando datos:", error));
@@ -28,7 +37,7 @@ export default function TablaUsuarios({ refreshSignal, rolFiltro }: TablaUsuario
                 </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">
-                {dataServidor.map((usuario, index) => (
+                {usuariosFiltrados.map((usuario, index) => (
                     <tr key={index} className="hover:bg-gray-800 transition-colors">
                         <td className="p-4 text-sm">
                             <span className="font-medium block">{usuario.username}</span>
@@ -39,7 +48,7 @@ export default function TablaUsuarios({ refreshSignal, rolFiltro }: TablaUsuario
                         </td>
                         <td className="p-4 text-sm">
                                 <span className={`px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wide border 
-                                        ${usuario.userrole === 'Administrador' 
+                                        ${usuario.userrole === 'admin' 
                                         ? 'bg-yellow-900/30 text-yellow-400 border-yellow-800/30'
                                         : 'bg-blue-900/30 text-blue-400 border-blue-800/30'
                                 }`}>
