@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import './index.css'
 import AdminView from "./pages/Admin/AdminView";
 import UserView from "./pages/Users/UserView";
@@ -17,7 +17,7 @@ import PlanificacionGastosView from "./pages/Users/PlanificacionGastosView.tsx"
 
 function App() {
   return (
-      <>
+      <BrowserRouter basename='/examen'>
         <Navbar />
         <Routes>
             <Route path="/" element={<GeneralView />} />
@@ -34,7 +34,7 @@ function App() {
             <Route path="/HistorialAccesosView" element={<HistorialAccesosView />}/>
             <Route path="/PlanificacionGastosView" element={<PlanificacionGastosView />}/>
         </Routes>
-      </>
+      </BrowserRouter>
   )
 }
 
