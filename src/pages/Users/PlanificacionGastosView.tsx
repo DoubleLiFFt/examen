@@ -19,16 +19,20 @@ export default function PlanificacionGastosView() {
     const [isLoading, setIsLoading] = useState(true);
 
     const cargarConfiguracionPresupuesto = async () => {
+        const userId = sessionStorage.getItem("userId");
+        if (!userId) return;
+
         try {
-            const response = await fetch("http://127.0.0.1:8000/obtenerPresupuestoActual/${userId}");
+            // Ahora la URL coincide exactamente con lo que espera el Backend
+            const response = await fetch(`http://127.0.0.1:8000/obtenerPresupuestoActual/${userId}`)
             if (response.ok) {
-                const data = await response.json();
-                setPresupuesto(data.limit_mount);
+                const data = await response.json()
+                setPresupuesto(data.limit_mount)
             }
         } catch (error) {
-            console.error("Error cargando presupuesto:", error);
+            console.error("Error:", error)
         }
-    };
+    }
     const guardarPresupuestoDB = async (valor: number) => {
         const userId = sessionStorage.getItem("userId");
         if (!userId) return;
