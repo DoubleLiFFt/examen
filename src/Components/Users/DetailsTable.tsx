@@ -77,9 +77,13 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
     function aplicarFiltro (categoria : string, inicio : string, fin : string, minimo : string, maximo : string){
         const resultado = dataServidor.filter((gasto) => {
             const coincidenceCategory = (categoria === "Categoría") || gasto.category === categoria
-            const coincidenceInit = (inicio >= "") || gasto.date >= inicio
-            const coincidenceFinal = (fin <= "") || gasto.date <= fin
-            return coincidenceCategory && coincidenceFinal && coincidenceInit
+            const coincidenceInit = (inicio === "") || gasto.date >= inicio
+            const coincidenceFinal = (fin === "") || gasto.date <= fin
+            const montoGasto = parseFloat(gasto.mount) || 0
+            const montoMin = minimo === "" ? 0 : parseFloat(minimo)
+            const montoMax = maximo === "" ? Infinity : parseFloat(maximo)
+            const coincidenceAmount = montoGasto >= montoMin && montoGasto <= montoMax
+            return coincidenceCategory && coincidenceInit && coincidenceFinal && coincidenceAmount
         })
         setListraMostrar(resultado)
         console.log("Filtrando por: ", {categoria, inicio, fin, minimo, maximo})
@@ -113,7 +117,7 @@ export default function DetailsTable({menuAbierto, setMenuAbierto, refreshSignal
             </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800">
-                {(menuAbierto ? listaMostrar : dataServidor).map((gasto) => (
+                {listaMostrar.map((gasto) =>  (
                     <tr key={gasto.id} className="hover:bg-[#202020] transition-colors">
                         <td className="px-6 py-4 text-sm">
                             {isEditId === gasto.id ? (
